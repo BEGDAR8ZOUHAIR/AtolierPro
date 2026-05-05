@@ -1,180 +1,273 @@
 import { StyleSheet } from "react-native";
-import COLORS from "../../constants/colors";
 
 const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    backgroundColor: COLORS.background,
-    justifyContent: "center",
-  },
-  scrollViewStyle: {
+  safeArea: {
     flex: 1,
-    backgroundColor: COLORS.background,
+    backgroundColor: "#F3F4F6",
   },
+
+  flex: {
+    flex: 1,
+  },
+
   scrollContent: {
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingTop: 16,
+    paddingBottom: 40,
+  },
+
+  // ─── Back button ─────────────────────────────────────────────────
+  backButton: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: "#FFFFFF",
+    alignItems: "center",
     justifyContent: "center",
+    marginBottom: 20,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.08,
+    shadowRadius: 4,
+    elevation: 2,
   },
-  card: {
-    backgroundColor: COLORS.cardBackground,
-    borderRadius: 16,
-    padding: 24,
-    shadowColor: COLORS.black,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.06,
-    shadowRadius: 8,
-    elevation: 4,
-    marginTop: -24,
+
+  // ─── Logo ─────────────────────────────────────────────────────────
+  logoContainer: {
+    alignItems: "center",
+    marginBottom: 10,
   },
+
+  logoImage: {
+    width: 48,
+    height: 48,
+  },
+
+  // ─── Top subtitle ─────────────────────────────────────────────────
+  topSubtitle: {
+    fontSize: 14,
+    color: "#6B7280",
+    textAlign: "center",
+    lineHeight: 20,
+    marginBottom: 28,
+  },
+
+  // ─── Step indicator ───────────────────────────────────────────────
   stepIndicator: {
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "flex-start",
     justifyContent: "center",
     marginBottom: 32,
   },
+
+  stepItem: {
+    alignItems: "center",
+    gap: 6,
+  },
+
   stepCircle: {
-    width: 28,
-    height: 28,
-    borderRadius: 14,
-    borderWidth: 2,
-    borderColor: COLORS.border,
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    borderWidth: 1.5,
+    borderColor: "#D1D5DB",
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "transparent",
   },
-  stepCircleText: {
-    fontSize: 12,
-    fontWeight: "bold",
-    color: COLORS.textSecondary,
-  },
+
   activeStep: {
-    borderColor: COLORS.primary,
-    backgroundColor: COLORS.primary,
+    borderColor: "#F97316",
+    backgroundColor: "#F97316",
   },
-  activeStepText: {
-    color: COLORS.white,
-  },
-  stepLine: {
-    flex: 0.3,
-    height: 2,
-    backgroundColor: COLORS.border,
-    marginHorizontal: 8,
-  },
-  formContainer: {
-    marginBottom: 16,
-  },
-  inputGroup: {
-    marginBottom: 20,
-  },
-  inputGroupRow: {
-    flexDirection: "row",
-    gap: 12,
-    marginBottom: 20,
-  },
-  inputGroupHalf: {
-    flex: 1,
-  },
-  label: {
+
+  stepCircleText: {
     fontSize: 14,
-    marginBottom: 8,
-    color: COLORS.textPrimary,
+    fontWeight: "600",
+    color: "#9CA3AF",
+  },
+
+  activeStepText: {
+    fontSize: 14,
+    fontWeight: "700",
+    color: "#FFFFFF",
+  },
+
+  stepLine: {
+    flex: 1,
+    height: 1.5,
+    backgroundColor: "#E5E7EB",
+    marginHorizontal: 8,
+    marginTop: 17, // centers with circle
+  },
+
+  stepLabel: {
+    fontSize: 11,
+    color: "#9CA3AF",
     fontWeight: "500",
   },
-  inputContainer: {
+
+  activeLabelText: {
+    color: "#F97316",
+    fontWeight: "700",
+  },
+
+  // ─── Input group ──────────────────────────────────────────────────
+  inputGroup: {
+    marginBottom: 16,
+  },
+
+  // Label row: label text + red asterisk inline
+  labelRow: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: COLORS.inputBackground,
+    marginBottom: 7,
+  },
+
+  label: {
+    fontSize: 13,
+    fontWeight: "500",
+    color: "#6B7280",   // gray label — matches design exactly
+  },
+
+  required: {
+    fontSize: 13,
+    color: "#EF4444",   // red asterisk
+    fontWeight: "500",
+  },
+
+  // ─── Input (no icons, plain white card) ───────────────────────────
+  input: {
+    backgroundColor: "#FFFFFF",
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: COLORS.border,
-    paddingHorizontal: 12,
-    height: 48,
+    borderColor: "#E5E7EB",
+    height: 52,
+    paddingHorizontal: 16,
+    fontSize: 15,
+    color: "#111827",
   },
-  inputIcon: {
-    marginRight: 10,
-  },
-  input: {
-    flex: 1,
-    height: 48,
-    color: COLORS.textPrimary,
-  },
-  eyeIcon: {
-    padding: 8,
-  },
-  passwordContainer: {
+
+  // ─── Code postal + Ville row ──────────────────────────────────────
+  rowGroup: {
     flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-  },
-  strengthContainer: {
-    marginTop: 12,
-    flexDirection: "row",
-    alignItems: "center",
     gap: 12,
+    marginBottom: 16,
   },
-  strengthBar: {
+
+  halfGroup: {
+    flex: 1,
+  },
+
+  // ─── Password field (eye icon on right) ───────────────────────────
+  passwordWrapper: {
     flexDirection: "row",
-    flex: 1,
-    gap: 4,
+    alignItems: "center",
+    backgroundColor: "#FFFFFF",
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "#E5E7EB",
+    height: 52,
+    paddingHorizontal: 16,
   },
-  strengthSegment: {
+
+  passwordInput: {
     flex: 1,
-    height: 4,
-    borderRadius: 2,
-    backgroundColor: COLORS.border,
+    fontSize: 15,
+    color: "#111827",
+    height: "100%",
   },
-  strengthText: {
-    fontSize: 12,
-    fontWeight: "600",
-    width: 60,
+
+  eyeButton: {
+    paddingLeft: 8,
+  },
+
+  // ─── Strength bar ─────────────────────────────────────────────────
+  // Single continuous bar — "Faible" left, "sécurisé" right
+  strengthRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 10,
+    gap: 10,
+  },
+
+  strengthLabelLeft: {
+    fontSize: 11,
+    color: "#9CA3AF",
+    width: 36,
+  },
+
+  strengthTrack: {
+    flex: 1,
+    height: 5,
+    backgroundColor: "#E5E7EB",
+    borderRadius: 3,
+    overflow: "hidden",
+  },
+
+  strengthFill: {
+    height: "100%",
+    backgroundColor: "#1E2D50",  // dark navy fill — matches design's dark bar
+    borderRadius: 3,
+  },
+
+  strengthFillStrong: {
+    backgroundColor: "#10B981",  // green when strong
+  },
+
+  strengthLabelRight: {
+    fontSize: 11,
+    color: "#9CA3AF",
+    width: 48,
     textAlign: "right",
   },
-  passwordRules: {
-    marginTop: 12,
-    gap: 4,
-  },
-  passwordRule: {
-    fontSize: 12,
-    color: COLORS.textSecondary,
-  },
-  passwordRuleMet: {
-    fontSize: 12,
-    color: COLORS.confirmed,
-  },
+
+  // ─── CTA Button ───────────────────────────────────────────────────
   button: {
-    backgroundColor: COLORS.primary,
+    backgroundColor: "#F97316",
     borderRadius: 9999,
     height: 56,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 24,
-    shadowColor: COLORS.black,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 2,
+    marginTop: 8,
+    marginBottom: 4,
+    shadowColor: "#F97316",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.35,
+    shadowRadius: 12,
+    elevation: 5,
   },
+
   buttonDisabled: {
-    backgroundColor: COLORS.disabled,
+    backgroundColor: "#D1D5DB",
+    shadowOpacity: 0,
+    elevation: 0,
   },
+
   buttonText: {
-    color: COLORS.white,
+    color: "#FFFFFF",
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: "700",
+    letterSpacing: 0.2,
   },
+
+  // ─── Footer ───────────────────────────────────────────────────────
   footer: {
     flexDirection: "row",
     justifyContent: "center",
-    marginTop: 24,
+    alignItems: "center",
+    marginTop: 20,
   },
+
   footerText: {
-    color: COLORS.textSecondary,
     fontSize: 14,
+    color: "#6B7280",
   },
-  link: {
-    color: COLORS.primary,
-    fontWeight: "bold",
+
+  footerLink: {
     fontSize: 14,
+    fontWeight: "700",
+    color: "#F97316",  // orange — "Me connecter"
   },
 });
 

@@ -2,6 +2,7 @@ import { Tabs } from "expo-router";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import COLORS from "../../constants/colors";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import GlobalHeader from "../../components/GlobalHeader";
 
 export default function TabLayout() {
   const insets = useSafeAreaInsets();
@@ -9,7 +10,8 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        headerShown: false,
+        header: () => <GlobalHeader showBackButton={false} />,
+        headerShown: true,
         tabBarActiveTintColor: COLORS.primary,
         tabBarInactiveTintColor: COLORS.textSecondary,
         tabBarStyle: {
@@ -36,6 +38,7 @@ export default function TabLayout() {
         name="index"
         options={{
           title: "Accueil",
+          header: () => <GlobalHeader showBackButton={false} />,
           tabBarIcon: ({ color, size, focused }) => (
             <Ionicons
               name={focused ? "home" : "home-outline"}
@@ -56,6 +59,7 @@ export default function TabLayout() {
         name="rendez-vous"
         options={{
           title: "Rendez-vous",
+          header: () => <GlobalHeader  />,
           tabBarIcon: ({ color, size, focused }) => (
             <Ionicons
               name={focused ? "calendar" : "calendar-outline"}
@@ -69,6 +73,7 @@ export default function TabLayout() {
         name="roi"
         options={{
           title: "ROI",
+          header: () => <GlobalHeader  />,
           tabBarIcon: ({ color, size, focused }) => (
             <Ionicons
               name={focused ? "bar-chart" : "bar-chart-outline"}
@@ -82,6 +87,7 @@ export default function TabLayout() {
         name="parametres"
         options={{
           title: "Paramètres",
+          header: () => <GlobalHeader />,
           tabBarIcon: ({ color, size, focused }) => (
             <Ionicons
               name={focused ? "settings" : "settings-outline"}

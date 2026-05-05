@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
   Animated,
+  Image,
 } from "react-native";
 import { useRouter } from "expo-router";
 import { useAuthStore } from "../../store/authStore";
@@ -92,13 +93,11 @@ export default function Welcome() {
         {/* ── Top section ── */}
         <View style={styles.topSection}>
           {/* Logo */}
-          <View style={styles.logo}>
-            <View style={styles.logoLeft} />
-            <View style={styles.logoRight} />
-          </View>
- 
-          {/* Title */}
-          <Text style={styles.title}>Bienvenue, {firstName} !</Text>
+          <Image
+            source={require("../../assets/images/logo.png")}
+            style={styles.logoImage}
+            resizeMode="contain"
+          />
  
           {/* Subtitle */}
           <Text style={styles.subtitle}>

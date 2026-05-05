@@ -39,30 +39,9 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
  
-  logo: {
-    flexDirection: "row",
-    width: 36,
-    height: 36,
-    gap: 3,
-  },
- 
-  logoLeft: {
-    flex: 1,
-    backgroundColor: COLORS.navy,
-    borderRadius: 4,
-  },
- 
-  logoRight: {
-    flex: 1,
-    backgroundColor: COLORS.primary,
-    borderRadius: 4,
-    marginTop: 6, // offset to match the two-block staggered logo
-  },
- 
-  // ─── Top subtitle ────────────────────────────────────────────────
-  topSubtitle: {
-    fontSize: 14,
-    color: COLORS.textSecondary,
+  logoImage: {
+    width: 80,
+    height: 40,
     textAlign: "center",
     lineHeight: 20,
     marginBottom: 28,

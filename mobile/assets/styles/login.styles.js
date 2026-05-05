@@ -23,27 +23,11 @@ const styles = StyleSheet.create({
     position: "relative",
   },
 
-  // ─── Logo (white two-block, top-left) ────────────────────────────
-  logo: {
-    flexDirection: "row",
-    width: 40,
-    height: 36,
-    gap: 4,
+  // ─── Logo (using logoLogin.png) ────────────────────────────
+  logoImage: {
+    width: 120,
+    height: 60,
     marginBottom: 20,
-  },
-
-  logoBlockLeft: {
-    flex: 1,
-    backgroundColor: "#FFFFFF",
-    borderRadius: 5,
-  },
-
-  logoBlockRight: {
-    flex: 1,
-    backgroundColor: "#FFFFFF",
-    borderRadius: 5,
-    marginTop: 8, // staggered offset
-    opacity: 0.85,
   },
 
   // ─── Tagline ─────────────────────────────────────────────────────
@@ -102,11 +86,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "#FFFFFF",
-    borderRadius: 14,
+    borderRadius: 12,
     borderWidth: 1,
     borderColor: "#E5E7EB",
     paddingHorizontal: 16,
-    height: 52,
+    height: 48,
   },
 
   inputError: {
@@ -153,14 +137,14 @@ const styles = StyleSheet.create({
 
   // ─── CTA button ──────────────────────────────────────────────────
   button: {
-    backgroundColor: COLORS.primary, // '#F97316'
+    backgroundColor: COLORS.primary,
     borderRadius: 9999,
     height: 56,
     justifyContent: "center",
     alignItems: "center",
     shadowColor: COLORS.primary,
     shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.35,
+    shadowOpacity: 0.25,
     shadowRadius: 12,
     elevation: 5,
     marginBottom: 4,
@@ -201,27 +185,29 @@ const styles = StyleSheet.create({
   // ─── Social buttons (icon only, no text) ─────────────────────────
   socialRow: {
     flexDirection: "row",
+    justifyContent: "space-between",
     gap: 14,
     marginBottom: 28,
   },
 
   socialButton: {
     flex: 1,
-    height: 52,
+    minHeight: 52,
     backgroundColor: "#FFFFFF",
     borderRadius: 14,
     borderWidth: 1,
     borderColor: "#E5E7EB",
     alignItems: "center",
     justifyContent: "center",
+    flexDirection: "row",
+    gap: 8,
+    paddingHorizontal: 14,
   },
 
-  // Google G — styled with Text since Ionicons doesn't have the colored G
-  googleG: {
-    fontSize: 20,
-    fontWeight: "700",
-    color: "#4285F4",   // Google blue
-    fontFamily: "System",
+  socialButtonText: {
+    fontSize: 15,
+    fontWeight: "600",
+    color: "#111827",
   },
 
   // ─── Footer ──────────────────────────────────────────────────────

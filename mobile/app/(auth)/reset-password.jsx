@@ -60,11 +60,7 @@ export default function ResetPassword() {
       <View style={{ flex: 1 }}>
         {/* Dark navy top */}
         <View style={styles.topSection}>
-          <Image
-            source={require("../../assets/images/i.png")}
-            style={styles.logo}
-            resizeMode="contain"
-          />
+          
           <Text style={styles.subtitle}>
             Choisissez un nouveau mot de passe pour sécuriser votre compte.
           </Text>

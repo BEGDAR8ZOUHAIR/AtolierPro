@@ -6,6 +6,7 @@ import {
   ScrollView,
   Alert,
   SafeAreaView,
+  Image,
 } from "react-native";
 import { useRouter } from "expo-router";
 import styles from "../../assets/styles/cgu.styles";
@@ -40,11 +41,11 @@ export default function CGU() {
  
         {/* Logo */}
         <View style={styles.logoContainer}>
-          {/* Two-part logo: navy left block + orange right block */}
-          <View style={styles.logo}>
-            <View style={styles.logoLeft} />
-            <View style={styles.logoRight} />
-          </View>
+          <Image
+            source={require("../../assets/images/logo.png")}
+            style={styles.logoImage}
+            resizeMode="contain"
+          />
         </View>
  
         {/* Top subtitle */}

@@ -9,7 +9,7 @@ export default function Accueil() {
 
   return (
     <View style={{ flex: 1, backgroundColor: COLORS.background, padding: 20 }}>
-      <View style={{ marginTop: 60, marginBottom: 30 }}>
+      <View style={{ marginTop: 20, marginBottom: 30 }}>
         <Text style={{ fontSize: 28, fontWeight: "bold", color: COLORS.textPrimary }}>
           Bonjour, {user?.fullName?.split(' ')[0] || "Artisan"}
         </Text>

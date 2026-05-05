@@ -7,12 +7,13 @@ import {
   TextInput,
   TouchableOpacity,
   ActivityIndicator,
-  Alert,
   ScrollView,
+  Alert,
+  Image,
+  SafeAreaView,
 } from "react-native";
 import styles from "../../assets/styles/signup.styles";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import COLORS from "../../constants/colors";
 import { useRouter } from "expo-router";
 import { useAuthStore } from "../../store/authStore";
 
@@ -41,320 +42,286 @@ export default function Signup() {
     if (/[A-Z]/.test(password)) score++;
     if (/\d/.test(password)) score++;
     if (/[^A-Za-z0-9]/.test(password)) score++;
-    return score;
+    return score; // 0–4
   };
 
   const handleSignUp = async () => {
     if (
-      !fullName ||
-      !profession ||
-      !phone ||
-      !serviceArea ||
-      !address ||
-      !postalCode ||
-      !city ||
-      !email ||
-      !password
+      !fullName || !profession || !phone || !serviceArea ||
+      !address || !postalCode || !city || !email || !password
     ) {
       return Alert.alert("Erreur", "Veuillez remplir tous les champs requis");
     }
 
     const result = await register(
-      fullName,
-      profession,
-      phone,
-      serviceArea,
-      address,
-      postalCode,
-      city,
-      email,
-      password
+      fullName, profession, phone, serviceArea,
+      address, postalCode, city, email, password
     );
 
     if (!result.success) {
       Alert.alert("Erreur", result.error);
     } else {
-      // Navigate to email verification
-      router.push({
-        pathname: "/verify-email",
-        params: { email: email }
-      });
+      router.push({ pathname: "/verify-email", params: { email } });
     }
   };
 
   const passwordStrength = getPasswordStrength();
-  const strengthLabels = ["Faible", "Faible", "Moyen", "Fort", "Sécurisé"];
-  const strengthColors = ["#EF4444", "#EF4444", "#F59E0B", "#10B981", "#10B981"];
+  // Strength bar fill: 0→0%, 1→25%, 2→50%, 3→75%, 4→100%
+  const strengthPercent = (passwordStrength / 4) * 100;
 
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-    >
-      <ScrollView
-        contentContainerStyle={styles.scrollContent}
-        style={styles.scrollViewStyle}
+    <SafeAreaView style={styles.safeArea}>
+      <KeyboardAvoidingView
+        style={styles.flex}
+        behavior={Platform.OS === "ios" ? "padding" : undefined}
       >
-        <View style={styles.card}>
-          {/* Step Indicator */}
+        <ScrollView
+          style={styles.flex}
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
+        >
+
+
+          {/* ── Logo ── */}
+          <View style={styles.logoContainer}>
+            <Image
+              source={require("../../assets/images/logo.png")}
+              style={styles.logoImage}
+              resizeMode="contain"
+            />
+          </View>
+
+          {/* ── Top subtitle ── */}
+          <Text style={styles.topSubtitle}>
+            créez votre espace professionnel et commencez{"\n"}à utiliser la plateforme.
+          </Text>
+
+          {/* ── Step indicator ── */}
           <View style={styles.stepIndicator}>
-            <View style={[styles.stepCircle, styles.activeStep]}>
-              <Text style={[styles.stepCircleText, styles.activeStepText]}>1</Text>
+            {/* Step 1 — active */}
+            <View style={styles.stepItem}>
+              <View style={[styles.stepCircle, styles.activeStep]}>
+                <Text style={styles.activeStepText}>1</Text>
+              </View>
+              <Text style={[styles.stepLabel, styles.activeLabelText]}>Identité</Text>
             </View>
+
             <View style={styles.stepLine} />
-            <View style={styles.stepCircle}>
-              <Text style={styles.stepCircleText}>2</Text>
+
+            {/* Step 2 — inactive */}
+            <View style={styles.stepItem}>
+              <View style={styles.stepCircle}>
+                <Text style={styles.stepCircleText}>2</Text>
+              </View>
+              <Text style={styles.stepLabel}>Accès</Text>
             </View>
+
             <View style={styles.stepLine} />
-            <View style={styles.stepCircle}>
-              <Text style={styles.stepCircleText}>3</Text>
+
+            {/* Step 3 — inactive */}
+            <View style={styles.stepItem}>
+              <View style={styles.stepCircle}>
+                <Text style={styles.stepCircleText}>3</Text>
+              </View>
+              <Text style={styles.stepLabel}>CGU</Text>
             </View>
           </View>
 
-          <View style={styles.formContainer}>
-            {/* Nom complet */}
-            <View style={styles.inputGroup}>
-              <Text style={styles.label}>Nom complet *</Text>
-              <View style={styles.inputContainer}>
+          {/* ── Form fields ── */}
+
+          {/* Nom complet */}
+          <View style={styles.inputGroup}>
+            <View style={styles.labelRow}>
+              <Text style={styles.label}>Nom complet</Text>
+              <Text style={styles.required}> *</Text>
+            </View>
+            <TextInput
+              style={styles.input}
+              placeholder="Thomas Ribeiro"
+              placeholderTextColor="#9CA3AF"
+              value={fullName}
+              onChangeText={setFullName}
+              autoCapitalize="words"
+            />
+          </View>
+
+          {/* Métier / Spécialité */}
+          <View style={styles.inputGroup}>
+            <View style={styles.labelRow}>
+              <Text style={styles.label}>Métier / Spécialité</Text>
+              <Text style={styles.required}> *</Text>
+            </View>
+            <TextInput
+              style={styles.input}
+              placeholder="Électricien"
+              placeholderTextColor="#9CA3AF"
+              value={profession}
+              onChangeText={setProfession}
+            />
+          </View>
+
+          {/* Numéro de téléphone */}
+          <View style={styles.inputGroup}>
+            <View style={styles.labelRow}>
+              <Text style={styles.label}>Numéro de téléphone</Text>
+              <Text style={styles.required}> *</Text>
+            </View>
+            <TextInput
+              style={styles.input}
+              placeholder="06 23 45 67 89"
+              placeholderTextColor="#9CA3AF"
+              value={phone}
+              onChangeText={setPhone}
+              keyboardType="phone-pad"
+            />
+          </View>
+
+          {/* Zone d'intervention */}
+          <View style={styles.inputGroup}>
+            <View style={styles.labelRow}>
+              <Text style={styles.label}>Zone d'intervention</Text>
+              <Text style={styles.required}> *</Text>
+            </View>
+            <TextInput
+              style={styles.input}
+              placeholder="Bordeaux et Gironde"
+              placeholderTextColor="#9CA3AF"
+              value={serviceArea}
+              onChangeText={setServiceArea}
+            />
+          </View>
+
+          {/* Adresse postal */}
+          <View style={styles.inputGroup}>
+            <View style={styles.labelRow}>
+              <Text style={styles.label}>Adresse postal</Text>
+              <Text style={styles.required}> *</Text>
+            </View>
+            <TextInput
+              style={styles.input}
+              placeholder="12 rue de la République"
+              placeholderTextColor="#9CA3AF"
+              value={address}
+              onChangeText={setAddress}
+            />
+          </View>
+
+          {/* Code postale + Ville — side by side */}
+          <View style={styles.rowGroup}>
+            <View style={styles.halfGroup}>
+              <View style={styles.labelRow}>
+                <Text style={styles.label}>Code postale</Text>
+                <Text style={styles.required}> *</Text>
+              </View>
+              <TextInput
+                style={styles.input}
+                placeholder="75008"
+                placeholderTextColor="#9CA3AF"
+                value={postalCode}
+                onChangeText={setPostalCode}
+                keyboardType="numeric"
+              />
+            </View>
+            <View style={styles.halfGroup}>
+              <View style={styles.labelRow}>
+                <Text style={styles.label}>Ville</Text>
+                <Text style={styles.required}> *</Text>
+              </View>
+              <TextInput
+                style={styles.input}
+                placeholder="Paris"
+                placeholderTextColor="#9CA3AF"
+                value={city}
+                onChangeText={setCity}
+              />
+            </View>
+          </View>
+
+          {/* Adresse email — no asterisk in design */}
+          <View style={styles.inputGroup}>
+            <Text style={styles.label}>Adresse email</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="thomas.ribeiro.elec@gmail.com"
+              placeholderTextColor="#9CA3AF"
+              value={email}
+              onChangeText={setEmail}
+              keyboardType="email-address"
+              autoCapitalize="none"
+              autoCorrect={false}
+            />
+          </View>
+
+          {/* Mot de passe */}
+          <View style={styles.inputGroup}>
+            <View style={styles.labelRow}>
+              <Text style={styles.label}>Mot de passe</Text>
+              <Text style={styles.required}> *</Text>
+            </View>
+            {/* Input + eye icon in same row */}
+            <View style={styles.passwordWrapper}>
+              <TextInput
+                style={styles.passwordInput}
+                placeholder="••••••••••••"
+                placeholderTextColor="#9CA3AF"
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry={!showPassword}
+                autoCapitalize="none"
+              />
+              <TouchableOpacity
+                onPress={() => setShowPassword(!showPassword)}
+                style={styles.eyeButton}
+                hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+              >
                 <Ionicons
-                  name="person-outline"
+                  name={showPassword ? "eye-outline" : "eye-off-outline"}
                   size={20}
-                  color={COLORS.primary}
-                  style={styles.inputIcon}
+                  color="#9CA3AF"
                 />
-                <TextInput
-                  style={styles.input}
-                  placeholder="Prénom et nom"
-                  placeholderTextColor={COLORS.placeholderText}
-                  value={fullName}
-                  onChangeText={setFullName}
-                  autoCapitalize="words"
-                />
-              </View>
-            </View>
-
-            {/* Métier / Spécialité */}
-            <View style={styles.inputGroup}>
-              <Text style={styles.label}>Métier / Spécialité *</Text>
-              <View style={styles.inputContainer}>
-                <Ionicons
-                  name="construct-outline"
-                  size={20}
-                  color={COLORS.primary}
-                  style={styles.inputIcon}
-                />
-                <TextInput
-                  style={styles.input}
-                  placeholder="Plombier, électricien, peintre..."
-                  placeholderTextColor={COLORS.placeholderText}
-                  value={profession}
-                  onChangeText={setProfession}
-                />
-              </View>
-            </View>
-
-            {/* Numéro de téléphone */}
-            <View style={styles.inputGroup}>
-              <Text style={styles.label}>Numéro de téléphone *</Text>
-              <View style={styles.inputContainer}>
-                <Ionicons
-                  name="call-outline"
-                  size={20}
-                  color={COLORS.primary}
-                  style={styles.inputIcon}
-                />
-                <TextInput
-                  style={styles.input}
-                  placeholder="06 12 34 56 78"
-                  placeholderTextColor={COLORS.placeholderText}
-                  value={phone}
-                  onChangeText={setPhone}
-                  keyboardType="phone-pad"
-                />
-              </View>
-            </View>
-
-            {/* Zone d'intervention */}
-            <View style={styles.inputGroup}>
-              <Text style={styles.label}>Zone d'intervention *</Text>
-              <View style={styles.inputContainer}>
-                <Ionicons
-                  name="location-outline"
-                  size={20}
-                  color={COLORS.primary}
-                  style={styles.inputIcon}
-                />
-                <TextInput
-                  style={styles.input}
-                  placeholder="Ville ou région"
-                  placeholderTextColor={COLORS.placeholderText}
-                  value={serviceArea}
-                  onChangeText={setServiceArea}
-                />
-              </View>
-            </View>
-
-            {/* Adresse postal */}
-            <View style={styles.inputGroup}>
-              <Text style={styles.label}>Adresse postal *</Text>
-              <View style={styles.inputContainer}>
-                <Ionicons
-                  name="home-outline"
-                  size={20}
-                  color={COLORS.primary}
-                  style={styles.inputIcon}
-                />
-                <TextInput
-                  style={styles.input}
-                  placeholder="Rue et numéro"
-                  placeholderTextColor={COLORS.placeholderText}
-                  value={address}
-                  onChangeText={setAddress}
-                />
-              </View>
-            </View>
-
-            {/* Code postale + Ville */}
-            <View style={styles.inputGroupRow}>
-              <View style={styles.inputGroupHalf}>
-                <Text style={styles.label}>Code postale *</Text>
-                <View style={[styles.inputContainer, { paddingHorizontal: 12 }]}>
-                  <TextInput
-                    style={styles.input}
-                    placeholder="Code postal"
-                    placeholderTextColor={COLORS.placeholderText}
-                    value={postalCode}
-                    onChangeText={setPostalCode}
-                    keyboardType="numeric"
-                  />
-                </View>
-              </View>
-              <View style={styles.inputGroupHalf}>
-                <Text style={styles.label}>Ville *</Text>
-                <View style={[styles.inputContainer, { paddingHorizontal: 12 }]}>
-                  <TextInput
-                    style={styles.input}
-                    placeholder="Ville"
-                    placeholderTextColor={COLORS.placeholderText}
-                    value={city}
-                    onChangeText={setCity}
-                  />
-                </View>
-              </View>
-            </View>
-
-            {/* Adresse email */}
-            <View style={styles.inputGroup}>
-              <Text style={styles.label}>Adresse email *</Text>
-              <View style={styles.inputContainer}>
-                <Ionicons
-                  name="mail-outline"
-                  size={20}
-                  color={COLORS.primary}
-                  style={styles.inputIcon}
-                />
-                <TextInput
-                  style={styles.input}
-                  placeholder="contact@entreprise.com"
-                  placeholderTextColor={COLORS.placeholderText}
-                  value={email}
-                  onChangeText={setEmail}
-                  keyboardType="email-address"
-                  autoCapitalize="none"
-                />
-              </View>
-            </View>
-
-            {/* Mot de passe */}
-            <View style={styles.inputGroup}>
-              <Text style={styles.label}>Mot de passe *</Text>
-              <View style={styles.passwordContainer}>
-                <View style={[styles.inputContainer, { flex: 1 }]}>
-                  <Ionicons
-                    name="lock-closed-outline"
-                    size={20}
-                    color={COLORS.primary}
-                    style={styles.inputIcon}
-                  />
-                  <TextInput
-                    style={styles.input}
-                    placeholder="Min. 10 caractères"
-                    placeholderTextColor={COLORS.placeholderText}
-                    value={password}
-                    onChangeText={setPassword}
-                    secureTextEntry={!showPassword}
-                  />
-                </View>
-                <TouchableOpacity
-                  onPress={() => setShowPassword(!showPassword)}
-                  style={styles.eyeIcon}
-                >
-                  <Ionicons
-                    name={showPassword ? "eye-outline" : "eye-off-outline"}
-                    size={20}
-                    color={COLORS.primary}
-                  />
-                </TouchableOpacity>
-              </View>
-
-              {/* Password strength bar */}
-              <View style={styles.strengthContainer}>
-                <View style={styles.strengthBar}>
-                  {[0,1,2,3].map((i) => (
-                    <View
-                      key={i}
-                      style={[
-                        styles.strengthSegment,
-                        i < passwordStrength && { backgroundColor: strengthColors[passwordStrength] }
-                      ]}
-                    />
-                  ))}
-                </View>
-                <Text style={[styles.strengthText, { color: strengthColors[passwordStrength] }]}>
-                  {strengthLabels[passwordStrength]}
-                </Text>
-              </View>
-
-              {/* Password rules */}
-              <View style={styles.passwordRules}>
-                <Text style={password.length >= 10 ? styles.passwordRuleMet : styles.passwordRule}>
-                  {password.length >= 10 ? "✓" : "●"} 10 caractères minimum
-                </Text>
-                <Text style={/[A-Z]/.test(password) ? styles.passwordRuleMet : styles.passwordRule}>
-                  {/[A-Z]/.test(password) ? "✓" : "●"} 1 majuscule
-                </Text>
-                <Text style={/\d/.test(password) ? styles.passwordRuleMet : styles.passwordRule}>
-                  {/\d/.test(password) ? "✓" : "●"} 1 chiffre
-                </Text>
-                <Text style={/[^A-Za-z0-9]/.test(password) ? styles.passwordRuleMet : styles.passwordRule}>
-                  {/[^A-Za-z0-9]/.test(password) ? "✓" : "●"} 1 caractère spécial
-                </Text>
-              </View>
-            </View>
-
-            {/* Signup button */}
-            <TouchableOpacity
-              style={[styles.button, isLoading && styles.buttonDisabled]}
-              onPress={handleSignUp}
-              disabled={isLoading}
-            >
-              {isLoading ? (
-                <ActivityIndicator color="#fff" />
-              ) : (
-                <Text style={styles.buttonText}>Créer mon compte</Text>
-              )}
-            </TouchableOpacity>
-
-            {/* Footer */}
-            <View style={styles.footer}>
-              <Text style={styles.footerText}>J'ai déjà un compte - </Text>
-              <TouchableOpacity onPress={() => router.back()}>
-                <Text style={styles.link}>Me connecter</Text>
               </TouchableOpacity>
             </View>
+
+            {/* Strength bar — single continuous bar */}
+            <View style={styles.strengthRow}>
+              <Text style={styles.strengthLabelLeft}>Faible</Text>
+              <View style={styles.strengthTrack}>
+                <View
+                  style={[
+                    styles.strengthFill,
+                    { width: `${strengthPercent}%` },
+                    passwordStrength >= 3 && styles.strengthFillStrong,
+                  ]}
+                />
+              </View>
+              <Text style={styles.strengthLabelRight}>sécurisé</Text>
+            </View>
           </View>
-        </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
+
+          {/* ── CTA Button ── */}
+          <TouchableOpacity
+            style={[styles.button, isLoading && styles.buttonDisabled]}
+            onPress={handleSignUp}
+            disabled={isLoading}
+            activeOpacity={0.85}
+          >
+            {isLoading ? (
+              <ActivityIndicator color="#fff" />
+            ) : (
+              <Text style={styles.buttonText}>Créer mon compte</Text>
+            )}
+          </TouchableOpacity>
+
+          {/* ── Footer ── */}
+          <View style={styles.footer}>
+            <Text style={styles.footerText}>j'ai déjà un compte - </Text>
+            <TouchableOpacity onPress={() => router.back()}>
+              <Text style={styles.footerLink}>Me connecter</Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 }

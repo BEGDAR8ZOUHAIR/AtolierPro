@@ -24,26 +24,11 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
  
-  // ─── Logo (two-block inline logo, small) ─────────────────────────
-  logo: {
-    flexDirection: "row",
-    width: 38,
-    height: 38,
-    gap: 3,
+// ─── Logo (using logo.png) ──────────────────────────────────────
+  logoImage: {
+    width: 80,
+    height: 40,
     marginBottom: 18,
-  },
- 
-  logoLeft: {
-    flex: 1,
-    backgroundColor: COLORS.navy,   // '#1E2D50'
-    borderRadius: 5,
-  },
- 
-  logoRight: {
-    flex: 1,
-    backgroundColor: COLORS.primary, // '#F97316'
-    borderRadius: 5,
-    marginTop: 7, // staggered offset
   },
  
   // ─── Title ───────────────────────────────────────────────────────

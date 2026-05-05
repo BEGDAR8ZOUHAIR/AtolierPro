@@ -48,11 +48,6 @@ export default function ForgotPassword() {
       <View style={{ flex:1 }}>
         {/* Dark navy top */}
         <View style={styles.topSection}>
-          <Image
-            source={require("../../assets/images/i.png")}
-            style={styles.logo}
-            resizeMode="contain"
-          />
           <Text style={styles.subtitle}>
             Entrez votre email professionnel.{"\n"}
             Vous recevrez un lien valable 1 heure.

@@ -1,6 +1,7 @@
 import { SplashScreen, Stack, useRouter, useSegments } from "expo-router";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import SafeScreen from "../components/SafeScreen";
+import GlobalHeader from "../components/GlobalHeader";
 import { StatusBar } from "expo-status-bar";
 import { useFonts } from "expo-font";
 
@@ -42,9 +43,41 @@ export default function RootLayout() {
   return (
     <SafeAreaProvider>
       <SafeScreen>
-        <Stack screenOptions={{ headerShown: false }}>
+        <Stack
+          screenOptions={{
+            headerShown: false, // Let individual layouts handle headers
+          }}
+        >
           <Stack.Screen name="(tabs)" />
           <Stack.Screen name="(auth)" />
+          <Stack.Screen
+            name="appointment_details"
+            options={{
+              header: () => <GlobalHeader  />,
+              headerShown: true,
+            }}
+          />
+          <Stack.Screen
+            name="appointment_booking/calendar"
+            options={{
+              header: () => <GlobalHeader  />,
+              headerShown: true,
+            }}
+          />
+          <Stack.Screen
+            name="appointment_booking/time"
+            options={{
+              header: () => <GlobalHeader  />,
+              headerShown: true,
+            }}
+          />
+          <Stack.Screen
+            name="appointment_booking/client_info"
+            options={{
+              header: () => <GlobalHeader  />,
+              headerShown: true,
+            }}
+          />
         </Stack>
       </SafeScreen>
       <StatusBar style="dark" />

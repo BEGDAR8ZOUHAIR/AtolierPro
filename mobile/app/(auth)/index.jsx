@@ -9,6 +9,7 @@ import {
   ActivityIndicator,
   ScrollView,
   Dimensions,
+  Image,
 } from "react-native";
 import { Link, useRouter } from "expo-router";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -22,7 +23,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState ({});
  
   const { login, isLoading, isCheckingAuth, user } = useAuthStore();
   const router = useRouter();
@@ -59,21 +60,18 @@ export default function Login() {
       >
         {/* ── Navy top section with wave curve ── */}
         <View style={styles.topSection}>
-          {/* Logo — white two-block, top-left */}
-          <View style={styles.logo}>
-            <View style={styles.logoBlockLeft} />
-            <View style={styles.logoBlockRight} />
-          </View>
- 
-          {/* Tagline — left-aligned */}
+          {/* Logo — using logoLogin.png */}
+          <Image
+            source={require("../../assets/images/logoLogin.png")}
+            style={styles.logoImage}
+            resizeMode="contain"
+          />
           <Text style={styles.tagline}>
             Gérez vos chantiers et vos devis en toute simplicité.
           </Text>
  
           {/* Wave curve at bottom of navy section */}
           <View style={styles.waveContainer}>
-            <View style={styles.waveLeft} />
-            <View style={styles.waveRight} />
           </View>
         </View>
  
@@ -162,16 +160,16 @@ export default function Login() {
             <View style={styles.dividerLine} />
           </View>
  
-          {/* Social buttons — icon only */}
+          {/* Social buttons */}
           <View style={styles.socialRow}>
-            <TouchableOpacity style={styles.socialButton} activeOpacity={0.7}>
-              {/* Google G logo */}
-              <Text style={styles.googleG}>G</Text>
+            <TouchableOpacity style={styles.socialButton} activeOpacity={0.8}>
+              <Ionicons name="logo-google" size={20} color="#DB4437" />
+              <Text style={styles.socialButtonText}>Google</Text>
             </TouchableOpacity>
  
-            <TouchableOpacity style={styles.socialButton} activeOpacity={0.7}>
-              {/* Apple logo */}
-              <Ionicons name="logo-apple" size={22} color="#000000" />
+            <TouchableOpacity style={styles.socialButton} activeOpacity={0.8}>
+              <Ionicons name="logo-apple" size={20} color="#000000" />
+              <Text style={styles.socialButtonText}>Apple</Text>
             </TouchableOpacity>
           </View>
  
