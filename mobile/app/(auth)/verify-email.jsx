@@ -23,7 +23,7 @@ export default function VerifyEmail() {
     try {
       const result = await verifyEmail(otp);
       if (result.success) {
-        router.replace("/welcome");
+        router.replace("/cgu");
       } else {
         Alert.alert("Erreur", result.error || "Code invalide");
       }

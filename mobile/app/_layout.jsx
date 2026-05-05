@@ -30,10 +30,13 @@ export default function RootLayout() {
   // handle navigation based on the auth state
   useEffect(() => {
     const inAuthScreen = segments[0] === "(auth)";
+    const currentAuthRoute = segments[1];
     const isSignedIn = user && token;
+    const onboardingRoutes = ["cgu", "welcome"];
+    const isOnboardingScreen = onboardingRoutes.includes(currentAuthRoute);
 
     if (!isSignedIn && !inAuthScreen) router.replace("/(auth)");
-    else if (isSignedIn && inAuthScreen) router.replace("/(tabs)");
+    else if (isSignedIn && inAuthScreen && !isOnboardingScreen) router.replace("/(tabs)");
   }, [user, token, segments]);
 
   return (

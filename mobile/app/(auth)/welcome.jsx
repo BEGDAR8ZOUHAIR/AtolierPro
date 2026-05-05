@@ -1,98 +1,157 @@
-import { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import { useEffect, useRef } from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  SafeAreaView,
+  Animated,
+} from "react-native";
 import { useRouter } from "expo-router";
 import { useAuthStore } from "../../store/authStore";
-import COLORS from "../../constants/colors";
 import styles from "../../assets/styles/welcome.styles";
 import ConfettiCannon from "react-native-confetti-cannon";
 import Ionicons from "@expo/vector-icons/Ionicons";
-
+ 
+// Config rows data
+const CONFIG_ITEMS = [
+  {
+    id: "sms",
+    icon: "chatbubble-ellipses-outline",
+    title: "Configuration SMS",
+    subtitle: "Activez les réponses automatiques",
+  },
+  {
+    id: "profile",
+    icon: "person-circle-outline",
+    title: "Profil Professionnel",
+    subtitle: "Personnalisez votre carte de visite",
+  },
+  {
+    id: "form",
+    icon: "document-text-outline",
+    title: "Formulaire",
+    subtitle: "Personnalisez votre formulaire",
+  },
+];
+ 
 export default function Welcome() {
-  const [confettiActive, setConfettiActive] = useState(true);
   const { user } = useAuthStore();
   const router = useRouter();
-
+  const confettiLeftRef = useRef(null);
+  const confettiRightRef = useRef(null);
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+ 
+  const firstName = user?.fullName?.split(" ")[0] || "Artisan";
+ 
   useEffect(() => {
-    const timer = setTimeout(() => setConfettiActive(false), 3000);
-    return () => clearTimeout(timer);
+    // Fade in the content
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 600,
+      useNativeDriver: true,
+    }).start();
+ 
+    // Fire confetti from both sides
+    setTimeout(() => {
+      confettiLeftRef.current?.start();
+      confettiRightRef.current?.start();
+    }, 300);
   }, []);
-
+ 
   const handleContinue = () => {
     router.replace("/(tabs)");
   };
-
+ 
   return (
-    <View style={styles.container}>
-      {confettiActive && (
-        <ConfettiCannon
-          count={100}
-          origin={{ x: -10, y: 0 }}
-          fadeOut={true}
-        />
-      )}
-
-      <View style={styles.content}>
-        {/* Logo */}
-        <Image
-          source={require("../../assets/images/i.png")}
-          style={styles.logo}
-          resizeMode="contain"
-        />
-
-        {/* Title */}
-        <Text style={styles.title}>
-          Bienvenue, {user?.fullName?.split(' ')[0] || "Artisan"} !
-        </Text>
-
-        {/* Subtitle */}
-        <Text style={styles.subtitle}>
-          Votre espace de travail est prêt. Transformez chaque appel en opportunité dès aujourd'hui.
-        </Text>
-
-        {/* Configuration Card */}
-        <View style={styles.configCard}>
-          <View style={styles.configHeader}>
-            <Text style={styles.configLabel}>CONFIGURATION</Text>
-            <Text style={styles.configTitle}>Guide de démarrage rapide</Text>
+    <SafeAreaView style={styles.safeArea}>
+      {/* Confetti — left side */}
+      <ConfettiCannon
+        ref={confettiLeftRef}
+        count={60}
+        origin={{ x: -20, y: -10 }}
+        autoStart={false}
+        fadeOut
+        fallSpeed={2800}
+        explosionSpeed={400}
+        colors={["#F97316", "#1E2D50", "#FCD34D", "#FFFFFF"]}
+      />
+ 
+      {/* Confetti — right side */}
+      <ConfettiCannon
+        ref={confettiRightRef}
+        count={60}
+        origin={{ x: 420, y: -10 }}
+        autoStart={false}
+        fadeOut
+        fallSpeed={2800}
+        explosionSpeed={400}
+        colors={["#F97316", "#1E2D50", "#FCD34D", "#FFFFFF"]}
+      />
+ 
+      <Animated.View style={[styles.container, { opacity: fadeAnim }]}>
+        {/* ── Top section ── */}
+        <View style={styles.topSection}>
+          {/* Logo */}
+          <View style={styles.logo}>
+            <View style={styles.logoLeft} />
+            <View style={styles.logoRight} />
           </View>
-
-          {/* Configuration Rows */}
-          <TouchableOpacity style={styles.configRow}>
-            <View style={styles.configRowContent}>
-              <Ionicons name="chatbubble-outline" size={20} color={COLORS.primary} />
-              <Text style={styles.configRowText}>Configuration SMS</Text>
-            </View>
-            <Ionicons name="chevron-forward" size={20} color={COLORS.textSecondary} />
-          </TouchableOpacity>
-
-          <View style={styles.configDivider} />
-
-          <TouchableOpacity style={styles.configRow}>
-            <View style={styles.configRowContent}>
-              <Ionicons name="person-outline" size={20} color={COLORS.primary} />
-              <Text style={styles.configRowText}>Profil Professionnel</Text>
-            </View>
-            <Ionicons name="chevron-forward" size={20} color={COLORS.textSecondary} />
-          </TouchableOpacity>
-
-          <View style={styles.configDivider} />
-
-          <TouchableOpacity style={styles.configRow}>
-            <View style={styles.configRowContent}>
-              <Ionicons name="document-outline" size={20} color={COLORS.primary} />
-              <Text style={styles.configRowText}>Formulaire</Text>
-            </View>
-            <Ionicons name="chevron-forward" size={20} color={COLORS.textSecondary} />
+ 
+          {/* Title */}
+          <Text style={styles.title}>Bienvenue, {firstName} !</Text>
+ 
+          {/* Subtitle */}
+          <Text style={styles.subtitle}>
+            Votre espace de travail est prêt. Transformez chaque appel en
+            opportunité dès aujourd'hui.
+          </Text>
+        </View>
+ 
+        {/* ── Configuration card ── */}
+        <View style={styles.configCard}>
+          {/* CONFIGURATION chip */}
+          <View style={styles.configChip}>
+            <Text style={styles.configChipText}>CONFIGURATION</Text>
+          </View>
+ 
+          {/* Card title */}
+          <Text style={styles.configTitle}>Guide de démarrage rapide</Text>
+ 
+          {/* Rows */}
+          <View style={styles.rowsContainer}>
+            {CONFIG_ITEMS.map((item) => (
+              <TouchableOpacity
+                key={item.id}
+                style={styles.configRow}
+                activeOpacity={0.7}
+              >
+                {/* Icon box */}
+                <View style={styles.iconBox}>
+                  <Ionicons name={item.icon } size={22} color="#6B7280" />
+                </View>
+ 
+                {/* Text */}
+                <View style={styles.rowTextContainer}>
+                  <Text style={styles.rowTitle}>{item.title}</Text>
+                  <Text style={styles.rowSubtitle}>{item.subtitle}</Text>
+                </View>
+ 
+                {/* Chevron */}
+                <Ionicons name="chevron-forward" size={18} color="#9CA3AF" />
+              </TouchableOpacity>
+            ))}
+          </View>
+ 
+          {/* CTA button inside card */}
+          <TouchableOpacity
+            style={styles.button}
+            onPress={handleContinue}
+            activeOpacity={0.85}
+          >
+            <Text style={styles.buttonText}>Accéder au tableau de bord</Text>
           </TouchableOpacity>
         </View>
-      </View>
-
-      {/* Continue Button */}
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={handleContinue}>
-          <Text style={styles.buttonText}>Accéder au tableau de bord</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+      </Animated.View>
+    </SafeAreaView>
   );
 }

@@ -1,152 +1,285 @@
 import { StyleSheet } from "react-native";
 import COLORS from "../../constants/colors";
-
+ 
 const styles = StyleSheet.create({
-  container: {
+  safeArea: {
     flex: 1,
     backgroundColor: COLORS.background,
-    padding: 24,
-    justifyContent: "center",
   },
-  stepIndicator: {
-    flexDirection: "row",
+ 
+  scrollView: {
+    flex: 1,
+  },
+ 
+  scrollContent: {
+    paddingHorizontal: 24,
+    paddingTop: 16,
+    paddingBottom: 24,
+  },
+ 
+  // ─── Back button ────────────────────────────────────────────────
+  backButton: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: COLORS.white,
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 24,
+    marginBottom: 20,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.08,
+    shadowRadius: 4,
+    elevation: 2,
   },
+ 
+  // ─── Logo ────────────────────────────────────────────────────────
+  logoContainer: {
+    alignItems: "center",
+    marginBottom: 12,
+  },
+ 
+  logo: {
+    flexDirection: "row",
+    width: 36,
+    height: 36,
+    gap: 3,
+  },
+ 
+  logoLeft: {
+    flex: 1,
+    backgroundColor: COLORS.navy,
+    borderRadius: 4,
+  },
+ 
+  logoRight: {
+    flex: 1,
+    backgroundColor: COLORS.primary,
+    borderRadius: 4,
+    marginTop: 6, // offset to match the two-block staggered logo
+  },
+ 
+  // ─── Top subtitle ────────────────────────────────────────────────
+  topSubtitle: {
+    fontSize: 14,
+    color: COLORS.textSecondary,
+    textAlign: "center",
+    lineHeight: 20,
+    marginBottom: 28,
+  },
+ 
+  // ─── Step indicator ──────────────────────────────────────────────
+  stepIndicator: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    justifyContent: "center",
+    marginBottom: 28,
+  },
+ 
+  stepItem: {
+    alignItems: "center",
+    gap: 6,
+  },
+ 
   stepCircle: {
-    width: 28,
-    height: 28,
-    borderRadius: 14,
+    width: 36,
+    height: 36,
+    borderRadius: 18,
     borderWidth: 2,
     borderColor: COLORS.border,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "transparent",
   },
-  stepCircleText: {
-    fontSize: 12,
-    fontWeight: "bold",
-    color: COLORS.textSecondary,
-  },
+ 
   completedStep: {
     borderColor: COLORS.navy,
     backgroundColor: COLORS.navy,
   },
+ 
   activeStep: {
     borderColor: COLORS.primary,
     backgroundColor: COLORS.primary,
   },
+ 
   activeStepText: {
+    fontSize: 14,
+    fontWeight: "700",
     color: COLORS.white,
   },
+ 
   stepLine: {
-    flex: 0.3,
+    flex: 1,
     height: 2,
     backgroundColor: COLORS.border,
-    marginHorizontal: 8,
+    marginHorizontal: 6,
+    marginTop: 17, // vertically center with circle
   },
+ 
+  stepLabel: {
+    fontSize: 11,
+    color: COLORS.textSecondary,
+    fontWeight: "500",
+  },
+ 
+  activeLabelText: {
+    color: COLORS.primary,
+    fontWeight: "700",
+  },
+ 
+  // ─── Terms card ──────────────────────────────────────────────────
+  termsCard: {
+    backgroundColor: COLORS.white,
+    borderRadius: 20,
+    padding: 24,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.06,
+    shadowRadius: 12,
+    elevation: 3,
+    marginBottom: 20,
+  },
+ 
+  // ─── Lock icon (inside card) ─────────────────────────────────────
   iconContainer: {
     alignItems: "center",
     marginBottom: 16,
   },
+ 
   iconCircle: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    backgroundColor: "rgba(249, 115, 22, 0.1)",
+    width: 72,
+    height: 72,
+    borderRadius: 36,
+    backgroundColor: "rgba(249, 115, 22, 0.10)",
     alignItems: "center",
     justifyContent: "center",
   },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
+ 
+  // ─── Card title & subtitle ───────────────────────────────────────
+  cardTitle: {
+    fontSize: 22,
+    fontWeight: "700",
     color: COLORS.textPrimary,
     textAlign: "center",
-    marginBottom: 4,
-  },
-  subtitle: {
-    fontSize: 14,
-    color: COLORS.textSecondary,
-    textAlign: "center",
-    marginBottom: 24,
-  },
-  termsCard: {
-    backgroundColor: COLORS.cardBackground,
-    borderRadius: 16,
-    padding: 16,
-    maxHeight: 240,
-    shadowColor: COLORS.black,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.06,
-    shadowRadius: 8,
-    elevation: 3,
-    borderWidth: 1,
-    borderColor: COLORS.border,
-    marginBottom: 24,
-  },
-  termsScroll: {
-    flex: 1,
-  },
-  sectionTitle: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: COLORS.textPrimary,
     marginBottom: 8,
-    marginTop: 16,
   },
-  paragraph: {
-    fontSize: 14,
+ 
+  cardSubtitle: {
+    fontSize: 13,
     color: COLORS.textSecondary,
-    lineHeight: 22,
-    marginBottom: 12,
+    textAlign: "center",
+    lineHeight: 19,
+    marginBottom: 20,
   },
-  checkboxContainer: {
+ 
+  divider: {
+    height: 1,
+    backgroundColor: COLORS.border,
+    marginBottom: 20,
+  },
+ 
+  // ─── Section rows ────────────────────────────────────────────────
+  sectionRow: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 24,
-    paddingHorizontal: 8,
+    gap: 10,
+    marginBottom: 10,
+    marginTop: 4,
   },
+ 
+  sectionBadge: {
+    width: 26,
+    height: 26,
+    borderRadius: 7,
+    backgroundColor: "#F3F4F6",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+ 
+  sectionBadgeText: {
+    fontSize: 13,
+    fontWeight: "700",
+    color: COLORS.textPrimary,
+  },
+ 
+  sectionTitle: {
+    fontSize: 15,
+    fontWeight: "700",
+    color: COLORS.textPrimary,
+  },
+ 
+  paragraph: {
+    fontSize: 13,
+    color: COLORS.textSecondary,
+    lineHeight: 21,
+    marginBottom: 18,
+  },
+ 
+  // ─── Checkbox ────────────────────────────────────────────────────
+  checkboxContainer: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    marginBottom: 28,
+    gap: 12,
+  },
+ 
   checkbox: {
-    width: 24,
-    height: 24,
-    borderRadius: 6,
+    width: 22,
+    height: 22,
+    borderRadius: 5,
     borderWidth: 2,
     borderColor: COLORS.border,
     alignItems: "center",
     justifyContent: "center",
-    marginRight: 12,
+    marginTop: 1,
+    flexShrink: 0,
   },
+ 
   checkboxChecked: {
     backgroundColor: COLORS.primary,
     borderColor: COLORS.primary,
   },
+ 
   checkboxText: {
     flex: 1,
-    fontSize: 14,
+    fontSize: 13,
     color: COLORS.textPrimary,
     lineHeight: 20,
   },
+ 
+  // ─── Bottom fixed button ─────────────────────────────────────────
+  bottomContainer: {
+    paddingHorizontal: 24,
+    paddingBottom: 32,
+    paddingTop: 8,
+    backgroundColor: COLORS.background,
+  },
+ 
   button: {
     backgroundColor: COLORS.primary,
     borderRadius: 9999,
     height: 56,
     justifyContent: "center",
     alignItems: "center",
-    shadowColor: COLORS.black,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 2,
+    shadowColor: COLORS.primary,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 10,
+    elevation: 4,
   },
+ 
   buttonDisabled: {
-    backgroundColor: COLORS.disabled,
+    backgroundColor: "#D1D5DB",
+    shadowOpacity: 0,
+    elevation: 0,
   },
+ 
   buttonText: {
     color: COLORS.white,
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: "700",
+    letterSpacing: 0.3,
   },
 });
-
+ 
 export default styles;

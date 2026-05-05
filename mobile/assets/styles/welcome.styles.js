@@ -1,123 +1,183 @@
 import { StyleSheet } from "react-native";
 import COLORS from "../../constants/colors";
-
+ 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    // Light gray gradient-like background matching the design
+    backgroundColor: "#EEF0F5",
+  },
+ 
   container: {
     flex: 1,
-    backgroundColor: COLORS.background,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 24,
+    paddingHorizontal: 20,
+    paddingTop: 24,
+    paddingBottom: 24,
   },
-  content: {
+ 
+  // ─── Top section ─────────────────────────────────────────────────
+  topSection: {
     alignItems: "center",
-    width: "100%",
+    paddingHorizontal: 16,
+    marginBottom: 28,
+    // Extra top padding to push content below confetti
+    paddingTop: 20,
   },
+ 
+  // ─── Logo (two-block inline logo, small) ─────────────────────────
   logo: {
-    width: 120,
-    height: 120,
-    marginBottom: 24,
+    flexDirection: "row",
+    width: 38,
+    height: 38,
+    gap: 3,
+    marginBottom: 18,
   },
+ 
+  logoLeft: {
+    flex: 1,
+    backgroundColor: COLORS.navy,   // '#1E2D50'
+    borderRadius: 5,
+  },
+ 
+  logoRight: {
+    flex: 1,
+    backgroundColor: COLORS.primary, // '#F97316'
+    borderRadius: 5,
+    marginTop: 7, // staggered offset
+  },
+ 
+  // ─── Title ───────────────────────────────────────────────────────
   title: {
-    fontSize: 28,
-    fontWeight: "bold",
+    fontSize: 26,
+    fontWeight: "800",
     color: COLORS.textPrimary,
-    marginBottom: 12,
     textAlign: "center",
+    marginBottom: 10,
+    letterSpacing: -0.3,
   },
+ 
+  // ─── Subtitle ────────────────────────────────────────────────────
   subtitle: {
-    fontSize: 16,
+    fontSize: 14,
     color: COLORS.textSecondary,
     textAlign: "center",
-    lineHeight: 24,
-    marginBottom: 32,
-    paddingHorizontal: 20,
+    lineHeight: 22,
+    paddingHorizontal: 8,
   },
+ 
+  // ─── Config card ─────────────────────────────────────────────────
   configCard: {
-    backgroundColor: COLORS.cardBackground,
-    borderRadius: 16,
-    padding: 16,
-    width: "100%",
-    shadowColor: COLORS.black,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.06,
-    shadowRadius: 8,
-    elevation: 3,
-    borderWidth: 1,
-    borderColor: COLORS.border,
-    marginBottom: 32,
+    backgroundColor: COLORS.white,
+    borderRadius: 20,
+    paddingHorizontal: 20,
+    paddingTop: 20,
+    paddingBottom: 20,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.08,
+    shadowRadius: 16,
+    elevation: 5,
+    flex: 1,               // fills remaining space so button sits at bottom
+    justifyContent: "space-between",
   },
-  configHeader: {
-    marginBottom: 16,
+ 
+  // top part of card (chip + title + rows)
+  // (no extra wrapper needed — flex column is default)
+ 
+  // ─── CONFIGURATION chip ──────────────────────────────────────────
+  configChip: {
+    alignSelf: "flex-start",
+    backgroundColor: "#F3F4F6",
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    marginBottom: 14,
   },
-  configLabel: {
+ 
+  configChipText: {
     fontSize: 10,
     fontWeight: "700",
-    color: COLORS.primary,
-    letterSpacing: 1,
-    marginBottom: 4,
+    color: "#6B7280",
+    letterSpacing: 1.2,
   },
+ 
+  // ─── Card title ──────────────────────────────────────────────────
   configTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
+    fontSize: 20,
+    fontWeight: "700",
     color: COLORS.textPrimary,
+    marginBottom: 20,
+    letterSpacing: -0.2,
   },
+ 
+  // ─── Rows container ──────────────────────────────────────────────
+  rowsContainer: {
+    gap: 12,
+    flex: 1,
+  },
+ 
+  // ─── Each config row (own card) ───────────────────────────────────
   configRow: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
-    paddingVertical: 12,
+    backgroundColor: "#F9FAFB",
+    borderRadius: 12,
+    padding: 14,
+    gap: 14,
+    borderWidth: 1,
+    borderColor: "#F3F4F6",
   },
-  configRowContent: {
-    flexDirection: "row",
+ 
+  // ─── Icon box ────────────────────────────────────────────────────
+  iconBox: {
+    width: 42,
+    height: 42,
+    borderRadius: 10,
+    backgroundColor: "#F3F4F6",
     alignItems: "center",
-    gap: 12,
+    justifyContent: "center",
+    flexShrink: 0,
   },
-  configRowText: {
-    fontSize: 16,
+ 
+  // ─── Row text ────────────────────────────────────────────────────
+  rowTextContainer: {
+    flex: 1,
+    gap: 3,
+  },
+ 
+  rowTitle: {
+    fontSize: 14,
+    fontWeight: "700",
     color: COLORS.textPrimary,
-    fontWeight: "500",
   },
-  configDivider: {
-    height: 1,
-    backgroundColor: COLORS.border,
+ 
+  rowSubtitle: {
+    fontSize: 12,
+    color: COLORS.textSecondary,
+    lineHeight: 17,
   },
-  buttonContainer: {
-    width: "100%",
-    paddingHorizontal: 16,
-  },
+ 
+  // ─── CTA button (inside card, bottom) ────────────────────────────
   button: {
     backgroundColor: COLORS.primary,
     borderRadius: 9999,
     height: 56,
     justifyContent: "center",
     alignItems: "center",
-    shadowColor: COLORS.black,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 2,
+    marginTop: 24,
+    shadowColor: COLORS.primary,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.35,
+    shadowRadius: 12,
+    elevation: 5,
   },
+ 
   buttonText: {
     color: COLORS.white,
     fontSize: 16,
-    fontWeight: "bold",
-  },
-  confettiWrapper: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    alignItems: "center",
-    justifyContent: "flex-start",
-    overflow: "hidden",
-  },
-  confettiPiece: {
-    position: "absolute",
-    top: 20,
-    borderRadius: 4,
+    fontWeight: "700",
+    letterSpacing: 0.2,
   },
 });
-
+ 
 export default styles;
