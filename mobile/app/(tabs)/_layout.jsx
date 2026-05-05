@@ -10,7 +10,7 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: COLORS.white,
+        tabBarActiveTintColor: COLORS.primary,
         tabBarInactiveTintColor: COLORS.textSecondary,
         tabBarStyle: {
           backgroundColor: COLORS.cardBackground,
@@ -40,7 +40,7 @@ export default function TabLayout() {
             <Ionicons
               name={focused ? "home" : "home-outline"}
               size={size}
-              color={focused ? COLORS.white : color}
+              color={focused ? COLORS.primary : color}
             />
           ),
           tabBarItemStyle: {
@@ -60,7 +60,7 @@ export default function TabLayout() {
             <Ionicons
               name={focused ? "calendar" : "calendar-outline"}
               size={size}
-              color={focused ? COLORS.white : color}
+              color={focused ? COLORS.primary : color}
             />
           ),
         }}
@@ -73,7 +73,7 @@ export default function TabLayout() {
             <Ionicons
               name={focused ? "bar-chart" : "bar-chart-outline"}
               size={size}
-              color={focused ? COLORS.white : color}
+              color={focused ? COLORS.primary : color}
             />
           ),
         }}
@@ -86,7 +86,7 @@ export default function TabLayout() {
             <Ionicons
               name={focused ? "settings" : "settings-outline"}
               size={size}
-              color={focused ? COLORS.white : color}
+              color={focused ? COLORS.primary : color}
             />
           ),
         }}

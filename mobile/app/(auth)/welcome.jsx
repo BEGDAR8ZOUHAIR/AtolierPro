@@ -5,6 +5,7 @@ import { useAuthStore } from "../../store/authStore";
 import COLORS from "../../constants/colors";
 import styles from "../../assets/styles/welcome.styles";
 import ConfettiCannon from "react-native-confetti-cannon";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 export default function Welcome() {
   const [confettiActive, setConfettiActive] = useState(true);
