@@ -1,176 +1,245 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import COLORS from "../../constants/colors";
 
+const { width } = Dimensions.get("window");
+
 const styles = StyleSheet.create({
-  container: {
+  root: {
     flex: 1,
-    backgroundColor: COLORS.background,
+    backgroundColor: COLORS.navy, // navy so the status bar area matches
   },
-  scrollViewStyle: {
-    flex: 1,
+
+  scrollContent: {
+    flexGrow: 1,
   },
+
+  // ─── Navy top section ─────────────────────────────────────────────
   topSection: {
-    flex: 0.4,
-    backgroundColor: COLORS.navy,
-    justifyContent: "center",
-    alignItems: "center",
-    paddingHorizontal: 20,
+    backgroundColor: COLORS.navy,  // '#1E2D50'
+    paddingTop: 60,
+    paddingHorizontal: 28,
+    // Extra bottom padding to give space for the wave
+    paddingBottom: 0,
+    position: "relative",
   },
+
+  // ─── Logo (white two-block, top-left) ────────────────────────────
   logo: {
-    width: 100,
-    height: 100,
-    marginBottom: 16,
+    flexDirection: "row",
+    width: 40,
+    height: 36,
+    gap: 4,
+    marginBottom: 20,
   },
+
+  logoBlockLeft: {
+    flex: 1,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 5,
+  },
+
+  logoBlockRight: {
+    flex: 1,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 5,
+    marginTop: 8, // staggered offset
+    opacity: 0.85,
+  },
+
+  // ─── Tagline ─────────────────────────────────────────────────────
   tagline: {
-    color: COLORS.white,
-    fontSize: 16,
-    textAlign: "center",
-    lineHeight: 22,
-    marginBottom: 16,
+    color: "#FFFFFF",
+    fontSize: 22,
+    fontWeight: "700",
+    lineHeight: 30,
+    marginBottom: 40,
+    letterSpacing: -0.3,
   },
-  featureList: {
-    width: "100%",
-    paddingHorizontal: 16,
+
+  // ─── Wave curve ──────────────────────────────────────────────────
+  // Achieved with two absolutely-positioned rounded rectangles
+  // that together create the concave wave at the bottom of the navy section
+  waveContainer: {
+    height: 40,
+    flexDirection: "row",
+    overflow: "hidden",
   },
-  featureItem: {
-    color: COLORS.white,
-    fontSize: 14,
-    lineHeight: 22,
-    marginBottom: 8,
-    textAlign: "center",
+
+  waveLeft: {
+    flex: 1,
+    backgroundColor: "#F3F4F6", // matches form background
+    borderTopRightRadius: 80,
   },
-  formCard: {
-    flex: 0.6,
-    backgroundColor: COLORS.white,
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
-    marginTop: -20,
-    padding: 24,
+
+  waveRight: {
+    flex: 1,
+    backgroundColor: "#F3F4F6",
+    borderTopLeftRadius: 80,
   },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: COLORS.textPrimary,
-    marginBottom: 24,
-    textAlign: "center",
+
+  // ─── Form section ─────────────────────────────────────────────────
+  formSection: {
+    flex: 1,
+    backgroundColor: "#F3F4F6",
+    paddingHorizontal: 24,
+    paddingTop: 28,
+    paddingBottom: 40,
   },
+
+  // ─── Input group ─────────────────────────────────────────────────
   inputGroup: {
-    marginBottom: 16,
+    marginBottom: 18,
   },
+
   label: {
     fontSize: 14,
-    color: COLORS.textPrimary,
+    fontWeight: "600",
+    color: "#111827",
     marginBottom: 8,
-    fontWeight: "500",
   },
+
   inputContainer: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: COLORS.inputBackground,
-    borderRadius: 12,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 14,
     borderWidth: 1,
-    borderColor: COLORS.border,
-    paddingHorizontal: 12,
-    height: 48,
+    borderColor: "#E5E7EB",
+    paddingHorizontal: 16,
+    height: 52,
   },
-  inputIcon: {
-    marginRight: 10,
+
+  inputError: {
+    borderColor: "#EF4444",
   },
+
   input: {
     flex: 1,
-    height: 48,
-    color: COLORS.textPrimary,
+    fontSize: 15,
+    color: "#111827",
+    height: "100%",
   },
-  eyeIcon: {
-    padding: 8,
+
+  eyeButton: {
+    paddingLeft: 8,
   },
-  errorText: {
+
+  fieldError: {
     color: "#EF4444",
     fontSize: 12,
-    marginTop: 4,
+    marginTop: 5,
   },
+
+  // ─── Forgot password ─────────────────────────────────────────────
+  forgotContainer: {
+    alignItems: "flex-end",
+    marginBottom: 24,
+    marginTop: -4,
+  },
+
+  forgotText: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: "#111827", // dark, NOT orange — matches design
+  },
+
+  // ─── General error ────────────────────────────────────────────────
   generalError: {
     color: "#EF4444",
-    fontSize: 14,
+    fontSize: 13,
     textAlign: "center",
     marginBottom: 16,
   },
-  forgotPasswordContainer: {
-    alignItems: "flex-end",
-    marginBottom: 24,
-  },
-  forgotPasswordText: {
-    color: COLORS.primary,
-    fontSize: 14,
-  },
+
+  // ─── CTA button ──────────────────────────────────────────────────
   button: {
-    backgroundColor: COLORS.primary,
+    backgroundColor: COLORS.primary, // '#F97316'
     borderRadius: 9999,
     height: 56,
     justifyContent: "center",
     alignItems: "center",
-    shadowColor: COLORS.black,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 2,
+    shadowColor: COLORS.primary,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.35,
+    shadowRadius: 12,
+    elevation: 5,
+    marginBottom: 4,
   },
+
   buttonDisabled: {
-    backgroundColor: COLORS.disabled,
+    backgroundColor: "#D1D5DB",
+    shadowOpacity: 0,
+    elevation: 0,
   },
+
   buttonText: {
-    color: COLORS.white,
+    color: "#FFFFFF",
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: "700",
+    letterSpacing: 0.2,
   },
-  dividerContainer: {
+
+  // ─── Divider ─────────────────────────────────────────────────────
+  divider: {
     flexDirection: "row",
     alignItems: "center",
     marginVertical: 24,
   },
+
   dividerLine: {
     flex: 1,
     height: 1,
-    backgroundColor: COLORS.border,
+    backgroundColor: "#E5E7EB",
   },
+
   dividerText: {
-    paddingHorizontal: 12,
-    color: COLORS.textSecondary,
-    fontSize: 14,
+    paddingHorizontal: 14,
+    fontSize: 13,
+    color: "#6B7280",
   },
-  socialButtons: {
+
+  // ─── Social buttons (icon only, no text) ─────────────────────────
+  socialRow: {
     flexDirection: "row",
-    gap: 12,
+    gap: 14,
+    marginBottom: 28,
   },
+
   socialButton: {
     flex: 1,
-    backgroundColor: COLORS.white,
+    height: 52,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 14,
     borderWidth: 1,
-    borderColor: COLORS.border,
-    borderRadius: 12,
-    height: 56,
-    flexDirection: "row",
+    borderColor: "#E5E7EB",
     alignItems: "center",
     justifyContent: "center",
   },
-  socialButtonText: {
-    color: COLORS.textPrimary,
-    fontSize: 16,
-    fontWeight: "600",
+
+  // Google G — styled with Text since Ionicons doesn't have the colored G
+  googleG: {
+    fontSize: 20,
+    fontWeight: "700",
+    color: "#4285F4",   // Google blue
+    fontFamily: "System",
   },
+
+  // ─── Footer ──────────────────────────────────────────────────────
   footer: {
     flexDirection: "row",
     justifyContent: "center",
-    marginTop: 24,
+    alignItems: "center",
   },
+
   footerText: {
-    color: COLORS.textSecondary,
     fontSize: 14,
+    color: "#6B7280",
   },
-  link: {
-    color: COLORS.primary,
-    fontWeight: "bold",
+
+  footerLink: {
     fontSize: 14,
+    fontWeight: "700",
+    color: "#111827",  // dark bold — matches design
   },
 });
 

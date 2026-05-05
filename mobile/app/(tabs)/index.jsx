@@ -39,14 +39,14 @@ export default function Accueil() {
 
       <TouchableOpacity
         style={{
-          backgroundColor: "red",
+          backgroundColor: COLORS.primary,
           borderRadius: 9999,
           height: 56,
           justifyContent: "center",
           alignItems: "center",
           marginTop: 24,
         }}
-        onPress={() => router.push("/cgu")}
+        onPress={() => router.push("/(tabs)/rendez-vous")}
       >
         <Text style={{ color: COLORS.white, fontSize: 16, fontWeight: "bold" }}>
           Voir mes rendez-vous
