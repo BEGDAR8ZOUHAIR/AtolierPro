@@ -1,0 +1,11 @@
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Claude
+.claude/
+CLAUDE.md
+
+# Design folder
+design/

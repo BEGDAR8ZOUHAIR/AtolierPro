@@ -1,0 +1,347 @@
+import { StyleSheet } from "react-native";
+import COLORS from "../../constants/colors";
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: COLORS.background,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: COLORS.background,
+  },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 16,
+    paddingTop: 20,
+    paddingBottom: 16,
+  },
+  headerTitle: {
+    fontSize: 28,
+    fontWeight: "bold",
+    color: COLORS.textPrimary,
+  },
+  toggleContainer: {
+    flexDirection: "row",
+    marginHorizontal: 16,
+    backgroundColor: COLORS.cardBackground,
+    borderRadius: 9999,
+    padding: 4,
+    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+  },
+  toggleButton: {
+    flex: 1,
+    paddingVertical: 8,
+    alignItems: "center",
+    borderRadius: 9999,
+  },
+  toggleButtonActive: {
+    backgroundColor: COLORS.primary,
+  },
+  toggleText: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: COLORS.textSecondary,
+  },
+  toggleTextActive: {
+    color: COLORS.white,
+  },
+  listContent: {
+    padding: 16,
+    paddingBottom: 100,
+  },
+  appointmentCard: {
+    backgroundColor: COLORS.cardBackground,
+    borderRadius: 16,
+    marginBottom: 16,
+    padding: 16,
+    shadowColor: COLORS.black,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.06,
+    shadowRadius: 8,
+    elevation: 3,
+    borderLeftWidth: 4,
+  },
+  cardContent: {
+    flexDirection: "row",
+    gap: 12,
+  },
+  dateBadge: {
+    alignItems: "center",
+    justifyContent: "center",
+    width: 48,
+  },
+  dateBadgeMonth: {
+    fontSize: 10,
+    fontWeight: "600",
+    color: COLORS.primary,
+    textTransform: "uppercase",
+  },
+  dateBadgeDay: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: COLORS.primary,
+  },
+  appointmentInfo: {
+    flex: 1,
+  },
+  cardHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    marginBottom: 8,
+  },
+  clientName: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: COLORS.textPrimary,
+    flex: 1,
+    marginRight: 8,
+  },
+  statusBadge: {
+    alignSelf: "flex-start",
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 50,
+  },
+  statusBadgeConfirmed: {
+    backgroundColor: COLORS.confirmed,
+  },
+  statusBadgePending: {
+    backgroundColor: "transparent",
+    borderWidth: 1,
+    borderColor: COLORS.pending,
+  },
+  statusBadgeText: {
+    fontSize: 12,
+    fontWeight: "600",
+    textTransform: "uppercase",
+  },
+  statusTextConfirmed: {
+    color: COLORS.white,
+  },
+  statusTextPending: {
+    color: COLORS.pending,
+  },
+  timeRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 4,
+  },
+  timeText: {
+    fontSize: 14,
+    color: COLORS.textSecondary,
+    marginLeft: 6,
+  },
+  serviceText: {
+    fontSize: 15,
+    fontWeight: "bold",
+    color: COLORS.textPrimary,
+    marginBottom: 4,
+  },
+  addressText: {
+    fontSize: 14,
+    color: COLORS.textSecondary,
+    marginBottom: 12,
+  },
+  buttonsContainer: {
+    flexDirection: "row",
+    gap: 12,
+  },
+  buttonGhost: {
+    flex: 1,
+    backgroundColor: COLORS.white,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    borderRadius: 9999,
+    height: 48,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonTextGhost: {
+    color: COLORS.textSecondary,
+    fontWeight: "600",
+    fontSize: 14,
+  },
+  buttonCall: {
+    flex: 1,
+    backgroundColor: COLORS.navy,
+    borderRadius: 9999,
+    height: 48,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 8,
+  },
+  buttonTextCall: {
+    color: COLORS.white,
+    fontWeight: "600",
+    fontSize: 14,
+  },
+  buttonConfirm: {
+    flex: 1,
+    backgroundColor: "transparent",
+    borderWidth: 1,
+    borderColor: COLORS.pending,
+    borderRadius: 9999,
+    height: 48,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonTextConfirm: {
+    color: COLORS.pending,
+    fontWeight: "600",
+    fontSize: 14,
+  },
+  fab: {
+    position: "absolute",
+    right: 20,
+    bottom: 20,
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    backgroundColor: COLORS.primary,
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: COLORS.black,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 8,
+  },
+  emptyContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 40,
+    marginTop: 40,
+  },
+  emptyText: {
+    fontSize: 18,
+    fontWeight: "600",
+    color: COLORS.textPrimary,
+    marginTop: 16,
+    marginBottom: 8,
+  },
+  emptySubtext: {
+    fontSize: 14,
+    color: COLORS.textSecondary,
+    textAlign: "center",
+  },
+  // Calendar View Styles
+  calendarContainer: {
+    padding: 16,
+  },
+  monthSelector: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 16,
+  },
+  monthNavButton: {
+    width: 36,
+    height: 36,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  monthNavText: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: COLORS.textPrimary,
+  },
+  monthLabel: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: COLORS.textPrimary,
+  },
+  daysHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 8,
+  },
+  dayHeaderItem: {
+    flex: 1,
+    alignItems: "center",
+  },
+  dayHeaderText: {
+    fontSize: 12,
+    fontWeight: "600",
+    color: COLORS.textSecondary,
+  },
+  calendarGrid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "flex-start",
+  },
+  dayItem: {
+    width: "13%",
+    aspectRatio: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 9999,
+    margin: 2,
+  },
+  dayWithAppointments: {
+    backgroundColor: COLORS.primary,
+  },
+  dayToday: {
+    borderWidth: 2,
+    borderColor: COLORS.primary,
+  },
+  dayNumber: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: COLORS.textPrimary,
+  },
+  dayNumberWithAppointments: {
+    color: COLORS.white,
+  },
+  dayNumberToday: {
+    color: COLORS.primary,
+  },
+  // Modal Styles
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.5)",
+    justifyContent: "flex-end",
+  },
+  modalContent: {
+    backgroundColor: COLORS.background,
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+    padding: 16,
+    paddingBottom: 32,
+    maxHeight: "80%",
+  },
+  modalHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 16,
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: COLORS.textPrimary,
+  },
+  modalCard: {
+    backgroundColor: COLORS.cardBackground,
+    borderRadius: 16,
+    padding: 16,
+    marginBottom: 12,
+    shadowColor: COLORS.black,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.06,
+    shadowRadius: 8,
+    elevation: 3,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+  },
+});
+
+export default styles;
