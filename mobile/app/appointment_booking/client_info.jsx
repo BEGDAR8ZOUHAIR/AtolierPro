@@ -54,11 +54,12 @@ export default function ClientInfoForm() {
           address: address,
           postalCode: postalCode,
           city: city,
-          motif: motif,
+          service: motif,
           appointmentDate: date,
           appointmentTime: time,
         })
       });
+
 
       if (!response.ok) {
         throw new Error("Échec de la création du rendez-vous : " + (await response.text()));
