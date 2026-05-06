@@ -1,75 +1,83 @@
-import { useState, useEffect } from 'react';
-import { Appointment } from '../types';
-import { API_ENDPOINTS } from '../utils/api';
+import { useState, useEffect, useCallback, useMemo } from 'react';
+import { Linking } from 'react-native';
+import { useAuthStore } from '../store/authStore';
+import { API_URL } from '../utils/api';
 
 export const useAppointments = () => {
-  const [appointments, setAppointments] = useState<Appointment[]>([]);
-  const [loading, setLoading] = useState(false);
+  const token = useAuthStore((state) => state.token);
+  const [appointments, setAppointments] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchAppointments = async () => {
-    setLoading(true);
-    setError(null);
+  const fetchAppointments = useCallback(async (refresh = false) => {
+    if (!token) {
+      setError('Utilisateur non authentifié');
+      setLoading(false);
+      setRefreshing(false);
+      return;
+    }
 
     try {
-      const response = await fetch(API_ENDPOINTS.appointments.list, {
+      if (refresh) {
+        setRefreshing(true);
+      } else {
+        setLoading(true);
+      }
+      setError(null);
+
+      const response = await fetch(`${API_URL}/appointments/user`, {
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 
+      const data = await response.json();
       if (!response.ok) {
-        throw new Error('Failed to fetch appointments');
+        throw new Error(data.message || 'Impossible de charger les rendez-vous');
       }
 
-      const data = await response.json();
       setAppointments(data);
     } catch (err) {
       setError((err as Error).message);
     } finally {
-      setLoading(false);
-    }
-  };
-
-  const confirmAppointment = async (id: string): Promise<boolean> => {
-    try {
-      const response = await fetch(API_ENDPOINTS.appointments.confirm(id), {
-        method: 'PATCH',
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
-        },
-      });
-
-      if (!response.ok) {
-        return false;
+      if (refresh) {
+        setRefreshing(false);
+      } else {
+        setLoading(false);
       }
-
-      // Update local state
-      setAppointments(prev =>
-        prev.map(appointment =>
-          appointment.id === id
-            ? { ...appointment, status: 'CONFIRMED' as const }
-            : appointment
-        )
-      );
-
-      return true;
-    } catch {
-      return false;
     }
-  };
+  }, [token]);
 
-  useEffect(() => {
-    if (localStorage.getItem('token')) {
-      fetchAppointments();
+  const callClient = useCallback(async (phone: string) => {
+    try {
+      await Linking.openURL(`tel:${phone}`);
+    } catch {
+      setError('Impossible de lancer l’appel');
     }
   }, []);
+
+  const appointmentsByDate = useMemo(() => {
+    return appointments.reduce<Record<string, any[]>>((acc, appt) => {
+      const key = new Date(appt.appointmentDate).toISOString().split('T')[0];
+      if (!acc[key]) acc[key] = [];
+      acc[key].push(appt);
+      return acc;
+    }, {});
+  }, [appointments]);
+
+  useEffect(() => {
+    fetchAppointments();
+  }, [fetchAppointments]);
 
   return {
     appointments,
     loading,
+    refreshing,
     error,
     fetchAppointments,
-    confirmAppointment,
+    callClient,
+    appointmentsByDate,
+    setAppointments,
   };
 };

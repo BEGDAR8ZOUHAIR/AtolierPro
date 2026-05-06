@@ -1,346 +1,496 @@
-import { StyleSheet } from "react-native";
-import COLORS from "../../constants/colors";
+import { StyleSheet, Dimensions } from "react-native";
+
+const { width } = Dimensions.get("window");
+const CELL_SIZE = Math.floor((width - 48 - 32) / 7); // 7 cols, card padding 16*2, screen padding 16*2
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLORS.background,
+    backgroundColor: "#F3F4F6",
   },
-  loadingContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: COLORS.background,
-  },
+
+  // ─── Header ──────────────────────────────────────────────────────
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingHorizontal: 16,
-    paddingTop: 20,
+    paddingHorizontal: 20,
+    paddingTop: 12,
+    paddingBottom: 4,
+  },
+
+  headerLogo: {
+    width: 38,
+    height: 38,
+  },
+
+  // ─── Screen title ─────────────────────────────────────────────────
+  screenTitle: {
+    fontSize: 26,
+    fontWeight: "800",
+    color: "#111827",
+    paddingHorizontal: 20,
+    paddingTop: 8,
     paddingBottom: 16,
+    letterSpacing: -0.3,
   },
-  headerTitle: {
-    fontSize: 28,
-    fontWeight: "bold",
-    color: COLORS.textPrimary,
-  },
-  toggleContainer: {
+
+  // ─── Toggle ───────────────────────────────────────────────────────
+  toggleWrap: {
     flexDirection: "row",
     marginHorizontal: 16,
-    backgroundColor: COLORS.cardBackground,
+    backgroundColor: "#FFFFFF",
     borderRadius: 9999,
     padding: 4,
     marginBottom: 16,
-    borderWidth: 1,
-    borderColor: COLORS.border,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.06,
+    shadowRadius: 4,
+    elevation: 2,
   },
-  toggleButton: {
+
+  toggleBtn: {
     flex: 1,
-    paddingVertical: 8,
+    flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 10,
     borderRadius: 9999,
   },
-  toggleButtonActive: {
-    backgroundColor: COLORS.primary,
+
+  toggleBtnActive: {
+    backgroundColor: "#F97316",
   },
+
   toggleText: {
     fontSize: 14,
     fontWeight: "600",
-    color: COLORS.textSecondary,
+    color: "#6B7280",
   },
+
   toggleTextActive: {
-    color: COLORS.white,
+    color: "#FFFFFF",
   },
+
+  // ─── List ─────────────────────────────────────────────────────────
   listContent: {
-    padding: 16,
-    paddingBottom: 100,
+    paddingHorizontal: 16,
+    paddingBottom: 120,
   },
-  appointmentCard: {
-    backgroundColor: COLORS.cardBackground,
+
+  // ─── Card ─────────────────────────────────────────────────────────
+  card: {
+    backgroundColor: "#FFFFFF",
     borderRadius: 16,
-    marginBottom: 16,
-    padding: 16,
-    shadowColor: COLORS.black,
+    marginBottom: 14,
+    overflow: "hidden",
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.06,
     shadowRadius: 8,
     elevation: 3,
-    borderLeftWidth: 4,
-  },
-  cardContent: {
     flexDirection: "row",
-    gap: 12,
   },
+
+  cardPending: {
+    // pending cards show orange left border accent via pendingAccent view
+  },
+
+  cardInModal: {
+    shadowOpacity: 0,
+    elevation: 0,
+    borderWidth: 1,
+    borderColor: "#F3F4F6",
+  },
+
+  // Orange left accent bar (pending only)
+  pendingAccent: {
+    width: 4,
+    backgroundColor: "#F97316",
+    borderTopLeftRadius: 16,
+    borderBottomLeftRadius: 16,
+  },
+
+  cardInner: {
+    flex: 1,
+    padding: 16,
+  },
+
+  // ─── Card top row ─────────────────────────────────────────────────
+  cardTop: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    marginBottom: 12,
+    gap: 10,
+  },
+
   dateBadge: {
     alignItems: "center",
-    justifyContent: "center",
-    width: 48,
+    width: 44,
   },
+
   dateBadgeMonth: {
     fontSize: 10,
-    fontWeight: "600",
-    color: COLORS.primary,
-    textTransform: "uppercase",
+    fontWeight: "700",
+    color: "#F97316",
+    letterSpacing: 0.5,
+    marginBottom: 4,
   },
-  dateBadgeDay: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: COLORS.primary,
+
+  dateBadgeDayCircle: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: "#1E2D50",
+    alignItems: "center",
+    justifyContent: "center",
   },
-  appointmentInfo: {
+
+  dateBadgeDayText: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: "#FFFFFF",
+  },
+
+  cardMeta: {
     flex: 1,
   },
-  cardHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
-    marginBottom: 8,
-  },
+
   clientName: {
     fontSize: 16,
-    fontWeight: "bold",
-    color: COLORS.textPrimary,
-    flex: 1,
-    marginRight: 8,
+    fontWeight: "700",
+    color: "#111827",
+    marginBottom: 4,
   },
-  statusBadge: {
-    alignSelf: "flex-start",
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    borderRadius: 50,
-  },
-  statusBadgeConfirmed: {
-    backgroundColor: COLORS.confirmed,
-  },
-  statusBadgePending: {
-    backgroundColor: "transparent",
-    borderWidth: 1,
-    borderColor: COLORS.pending,
-  },
-  statusBadgeText: {
-    fontSize: 12,
-    fontWeight: "600",
-    textTransform: "uppercase",
-  },
-  statusTextConfirmed: {
-    color: COLORS.white,
-  },
-  statusTextPending: {
-    color: COLORS.pending,
-  },
+
   timeRow: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 4,
+    gap: 4,
   },
+
   timeText: {
-    fontSize: 14,
-    color: COLORS.textSecondary,
-    marginLeft: 6,
+    fontSize: 13,
+    color: "#6B7280",
   },
-  serviceText: {
-    fontSize: 15,
-    fontWeight: "bold",
-    color: COLORS.textPrimary,
-    marginBottom: 4,
+
+  // Status badges
+  statusBadge: {
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 9999,
+    alignSelf: "flex-start",
   },
-  addressText: {
-    fontSize: 14,
-    color: COLORS.textSecondary,
+
+  statusConfirmed: {
+    backgroundColor: "#22C55E",
+  },
+
+  statusPending: {
+    backgroundColor: "transparent",
+    borderWidth: 1.5,
+    borderColor: "#F97316",
+  },
+
+  statusText: {
+    fontSize: 11,
+    fontWeight: "700",
+    letterSpacing: 0.3,
+  },
+
+  statusTextConfirmed: {
+    color: "#FFFFFF",
+  },
+
+  statusTextPending: {
+    color: "#F97316",
+  },
+
+  // ─── Divider ──────────────────────────────────────────────────────
+  divider: {
+    height: 1,
+    backgroundColor: "#F3F4F6",
     marginBottom: 12,
   },
-  buttonsContainer: {
+
+  // ─── Service + address ────────────────────────────────────────────
+  serviceText: {
+    fontSize: 15,
+    fontWeight: "700",
+    color: "#111827",
+    marginBottom: 2,
+  },
+
+  addressText: {
+    fontSize: 13,
+    color: "#6B7280",
+    marginBottom: 14,
+  },
+
+  // ─── Buttons ──────────────────────────────────────────────────────
+  buttonsRow: {
     flexDirection: "row",
-    gap: 12,
+    gap: 10,
   },
-  buttonGhost: {
+
+  btnDetails: {
     flex: 1,
-    backgroundColor: COLORS.white,
-    borderWidth: 1,
-    borderColor: COLORS.border,
+    height: 44,
+    backgroundColor: "#F3F4F6",
     borderRadius: 9999,
-    height: 48,
-    justifyContent: "center",
     alignItems: "center",
+    justifyContent: "center",
   },
-  buttonTextGhost: {
-    color: COLORS.textSecondary,
-    fontWeight: "600",
+
+  btnDetailsText: {
     fontSize: 14,
+    fontWeight: "600",
+    color: "#374151",
   },
-  buttonCall: {
+
+  btnCall: {
     flex: 1,
-    backgroundColor: COLORS.navy,
+    height: 44,
+    backgroundColor: "#1E2D50",
     borderRadius: 9999,
-    height: 48,
     flexDirection: "row",
-    justifyContent: "center",
     alignItems: "center",
-    gap: 8,
+    justifyContent: "center",
+    gap: 6,
   },
-  buttonTextCall: {
-    color: COLORS.white,
-    fontWeight: "600",
+
+  btnCallText: {
     fontSize: 14,
+    fontWeight: "600",
+    color: "#FFFFFF",
   },
-  buttonConfirm: {
+
+  btnConfirm: {
     flex: 1,
+    height: 44,
     backgroundColor: "transparent",
-    borderWidth: 1,
-    borderColor: COLORS.pending,
     borderRadius: 9999,
-    height: 48,
-    justifyContent: "center",
+    borderWidth: 1.5,
+    borderColor: "#F97316",
     alignItems: "center",
+    justifyContent: "center",
   },
-  buttonTextConfirm: {
-    color: COLORS.pending,
-    fontWeight: "600",
+
+  btnConfirmText: {
     fontSize: 14,
+    fontWeight: "600",
+    color: "#F97316",
   },
+
+  // ─── Empty state ──────────────────────────────────────────────────
+  emptyWrap: {
+    alignItems: "center",
+    paddingTop: 80,
+    paddingHorizontal: 32,
+  },
+
+  emptyTitle: {
+    fontSize: 18,
+    fontWeight: "700",
+    color: "#111827",
+    marginTop: 16,
+    marginBottom: 6,
+  },
+
+  emptySubtitle: {
+    fontSize: 14,
+    color: "#6B7280",
+    textAlign: "center",
+    lineHeight: 20,
+  },
+
+  // ─── FAB ──────────────────────────────────────────────────────────
   fab: {
     position: "absolute",
     right: 20,
-    bottom: 20,
-    width: 64,
-    height: 64,
-    borderRadius: 32,
-    backgroundColor: COLORS.primary,
-    justifyContent: "center",
+    bottom: 90,  // above bottom tab bar
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    backgroundColor: "#F97316",
     alignItems: "center",
-    shadowColor: COLORS.black,
+    justifyContent: "center",
+    shadowColor: "#F97316",
     shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
+    shadowOpacity: 0.4,
+    shadowRadius: 10,
     elevation: 8,
   },
-  emptyContainer: {
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 40,
-    marginTop: 40,
-  },
-  emptyText: {
-    fontSize: 18,
-    fontWeight: "600",
-    color: COLORS.textPrimary,
-    marginTop: 16,
-    marginBottom: 8,
-  },
-  emptySubtext: {
-    fontSize: 14,
-    color: COLORS.textSecondary,
-    textAlign: "center",
-  },
-  // Calendar View Styles
-  calendarContainer: {
-    padding: 16,
-  },
-  monthSelector: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: 16,
-  },
-  monthNavButton: {
-    width: 36,
-    height: 36,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  monthNavText: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: COLORS.textPrimary,
-  },
-  monthLabel: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: COLORS.textPrimary,
-  },
-  daysHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 8,
-  },
-  dayHeaderItem: {
+
+  // ─── Calendar ─────────────────────────────────────────────────────
+  calendarScroll: {
     flex: 1,
-    alignItems: "center",
+    paddingHorizontal: 16,
   },
-  dayHeaderText: {
-    fontSize: 12,
-    fontWeight: "600",
-    color: COLORS.textSecondary,
-  },
-  calendarGrid: {
+
+  // Month nav — white rounded pill
+  monthNavContainer: {
     flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "flex-start",
-  },
-  dayItem: {
-    width: "13%",
-    aspectRatio: 1,
     alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 9999,
-    margin: 2,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 14,
+    paddingVertical: 14,
+    paddingHorizontal: 16,
+    marginBottom: 12,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+    elevation: 2,
   },
-  dayWithAppointments: {
-    backgroundColor: COLORS.primary,
+
+  monthNavSide: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+    minWidth: 60,
   },
-  dayToday: {
-    borderWidth: 2,
-    borderColor: COLORS.primary,
-  },
-  dayNumber: {
-    fontSize: 14,
-    fontWeight: "600",
-    color: COLORS.textPrimary,
-  },
-  dayNumberWithAppointments: {
-    color: COLORS.white,
-  },
-  dayNumberToday: {
-    color: COLORS.primary,
-  },
-  // Modal Styles
-  modalOverlay: {
-    flex: 1,
-    backgroundColor: "rgba(0,0,0,0.5)",
+
+  monthNavSideRight: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+    minWidth: 60,
     justifyContent: "flex-end",
   },
-  modalContent: {
-    backgroundColor: COLORS.background,
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
-    padding: 16,
-    paddingBottom: 32,
-    maxHeight: "80%",
+
+  monthNavSideText: {
+    fontSize: 13,
+    fontWeight: "600",
+    color: "#9CA3AF",
+    letterSpacing: 0.5,
   },
-  modalHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 16,
+
+  monthNavCenter: {
+    flex: 1,
+    textAlign: "center",
+    fontSize: 16,
+    fontWeight: "700",
+    color: "#111827",
   },
-  modalTitle: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: COLORS.textPrimary,
-  },
-  modalCard: {
-    backgroundColor: COLORS.cardBackground,
+
+  // Calendar card
+  calendarCard: {
+    backgroundColor: "#FFFFFF",
     borderRadius: 16,
     padding: 16,
-    marginBottom: 12,
-    shadowColor: COLORS.black,
+    marginBottom: 20,
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.06,
     shadowRadius: 8,
     elevation: 3,
-    borderWidth: 1,
-    borderColor: COLORS.border,
+  },
+
+  daysHeaderRow: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginBottom: 8,
+  },
+
+  dayHeaderText: {
+    width: CELL_SIZE,
+    textAlign: "center",
+    fontSize: 11,
+    fontWeight: "700",
+    color: "#9CA3AF",
+    letterSpacing: 0.3,
+  },
+
+  calendarGrid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+  },
+
+  calCell: {
+    width: CELL_SIZE,
+    height: CELL_SIZE,
+    alignItems: "center",
+    justifyContent: "center",
+    marginVertical: 2,
+  },
+
+  calDayInner: {
+    width: CELL_SIZE - 4,
+    height: CELL_SIZE - 4,
+    borderRadius: (CELL_SIZE - 4) / 2,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  calDayWithAppts: {
+    backgroundColor: "#F97316",
+  },
+
+  calDayText: {
+    fontSize: 14,
+    fontWeight: "500",
+    color: "#111827",
+  },
+
+  calDayTextWithAppts: {
+    color: "#FFFFFF",
+    fontWeight: "700",
+  },
+
+  calDayTextToday: {
+    fontWeight: "700",
+    color: "#111827",
+  },
+
+  calDayOther: {
+    fontSize: 13,
+    color: "#D1D5DB",
+  },
+
+  // Today underline (instead of border circle)
+  todayUnderline: {
+    position: "absolute",
+    bottom: 2,
+    width: 16,
+    height: 2,
+    borderRadius: 1,
+    backgroundColor: "#111827",
+  },
+
+  // ─── Modal bottom sheet ───────────────────────────────────────────
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.4)",
+    justifyContent: "flex-end",
+  },
+
+  modalSheet: {
+    backgroundColor: "#F3F4F6",
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+    paddingTop: 12,
+    paddingHorizontal: 16,
+    paddingBottom: 40,
+    maxHeight: "80%",
+  },
+
+  modalHandle: {
+    width: 40,
+    height: 4,
+    borderRadius: 2,
+    backgroundColor: "#D1D5DB",
+    alignSelf: "center",
+    marginBottom: 16,
+  },
+
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: "700",
+    color: "#111827",
+    marginBottom: 16,
+    textTransform: "capitalize",
   },
 });
 
