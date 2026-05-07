@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
   btnDetails: {
     flex: 1,
     height: 44,
-    backgroundColor: COLORS.inputBackground,
+    backgroundColor: COLORS.background,
     borderRadius: 9999,
     alignItems: "center",
     justifyContent: "center",
@@ -247,7 +247,7 @@ const styles = StyleSheet.create({
   btnDetailsText: {
     fontSize: 14,
     fontWeight: "600",
-    color: COLORS.placeholderText,
+    color: COLORS.navy,
   },
 
   btnCall: {
@@ -270,10 +270,10 @@ const styles = StyleSheet.create({
   btnConfirm: {
     flex: 1,
     height: 44,
-    backgroundColor: "transparent",
+    backgroundColor: 'transparent',
     borderRadius: 9999,
     borderWidth: 1.5,
-    borderColor: COLORS.pending,
+    borderColor: COLORS.orange,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -281,7 +281,7 @@ const styles = StyleSheet.create({
   btnConfirmText: {
     fontSize: 14,
     fontWeight: "600",
-    color: COLORS.pending,
+    color: COLORS.orange,
   },
 
   // ─── Empty state ──────────────────────────────────────────────────
@@ -310,7 +310,7 @@ const styles = StyleSheet.create({
   fab: {
     position: "absolute",
     right: 20,
-    bottom: 90,  // above bottom tab bar
+    bottom: 20,
     width: 56,
     height: 56,
     borderRadius: 28,
