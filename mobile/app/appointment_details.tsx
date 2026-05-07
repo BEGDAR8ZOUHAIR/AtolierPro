@@ -92,14 +92,7 @@ export default function AppointmentDetails() {
 
   return (
     <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
-          <Text style={styles.backButtonText}>{"<"}</Text>
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Détails du rendez-vous</Text>
-        <View style={{ width: 24 }} />
-      </View>
+      
 
       {/* Main Card */}
       <View style={styles.card}>

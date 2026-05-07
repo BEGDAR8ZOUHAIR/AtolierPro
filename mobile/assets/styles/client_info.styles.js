@@ -6,36 +6,20 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.background,
   },
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 16,
-    paddingBottom: 8,
-    backgroundColor: COLORS.cardBackground,
-    borderBottomWidth: 1,
-    borderBottomColor: COLORS.border,
+   title: {
+    fontSize: 22,
+    fontWeight: "700",
+    color: "#111827",
+    textAlign: "center",
+    marginBottom: 10,
+    letterSpacing: -0.3,
   },
-  backButton: {
-    padding: 8,
-  },
-  backButtonText: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: COLORS.textPrimary,
-  },
-  headerTextContainer: {
-    flex: 1,
-    alignItems: "center",
-  },
-  headerTitle: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: COLORS.textPrimary,
-  },
+
   subtitle: {
     fontSize: 14,
-    color: COLORS.textSecondary,
-    marginTop: 4,
+    color: "#6B7280",
+    textAlign: "center",
+    marginBottom: 20,
   },
   formContainer: {
     padding: 16,
@@ -47,10 +31,9 @@ const styles = StyleSheet.create({
     padding: 16,
     shadowColor: COLORS.black,
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.06,
+    shadowOpacity: 0.1,
     shadowRadius: 8,
-    elevation: 3,
-    borderWidth: 1,
+    elevation: 2,
     borderColor: COLORS.border,
   },
   inputGroup: {
@@ -67,7 +50,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 14,
     marginBottom: 8,
-    color: COLORS.textPrimary,
+    color: COLORS.placeholderText,
     fontWeight: "500",
   },
   inputContainer: {
@@ -110,17 +93,12 @@ const styles = StyleSheet.create({
     height: 56,
     justifyContent: "center",
     alignItems: "center",
-    shadowColor: COLORS.black,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 2,
   },
   buttonDisabled: {
-    backgroundColor: COLORS.disabled,
+    backgroundColor: COLORS.border,
   },
   buttonText: {
-    color: COLORS.white,
+    color: COLORS.disabled,
     fontSize: 16,
     fontWeight: "bold",
   },

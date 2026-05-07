@@ -11,7 +11,7 @@ const COLORS = {
   white: "#ffffff",
   black: "#000000",
   confirmed: "#10B981", // green for confirmed status
-  pending: "#F97316", // orange for pending status
+  pending: "#F0C32E", // dark yallow for pending status
   disabled: "#9CA3AF", // gray for disabled
 };
 
