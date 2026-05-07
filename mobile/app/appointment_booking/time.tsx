@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, Alert, ActivityIndicator } from "react-native";
+import { View, Text, TouchableOpacity, Alert, ActivityIndicator , StyleSheet } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import { useAuthStore } from "../../store/authStore";
 import { API_URL } from "../../constants/api";
 import COLORS from "../../constants/colors";
-import styles from "../../assets/styles/time.styles";
 
 export default function TimeSlotScreen() {
   const router = useRouter();
@@ -103,28 +102,9 @@ export default function TimeSlotScreen() {
 
   return (
     <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => router.back()}>
-          <Text style={styles.headerNavText}>{"<"}</Text>
-        </TouchableOpacity>
-        <View style={{ flex: 1 }}>
-          <Text style={styles.headerTitle}>Choisissez un créneau</Text>
-          <Text style={styles.subtitle}>Créneaux affichés en heure locale (Paris)</Text>
-        </View>
-      </View>
-
-      {/* Date Info */}
-      <View style={styles.dateInfo}>
-        <Text style={styles.dateText}>
-          {selectedDate.toLocaleDateString("fr-FR", {
-            weekday: "long",
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
-        </Text>
-      </View>
+      {/* ── Title + Subtitle ── */}
+            <Text style={styles.title}>Choisissez un créneau</Text>
+            <Text style={styles.subtitle}>Créneaux affichés en heure locale (Paris)</Text>
 
       {/* Time Slot Grid */}
       <View style={styles.timeGrid}>
@@ -153,18 +133,6 @@ export default function TimeSlotScreen() {
         })}
       </View>
 
-      {/* Legend */}
-      <View style={styles.legendContainer}>
-        <View style={styles.legendItem}>
-          <View style={[styles.legendDot, styles.legendAvailableDot]} />
-          <Text style={styles.legendText}>Disponible</Text>
-        </View>
-        <View style={styles.legendItem}>
-          <View style={[styles.legendDot, styles.legendBookedDot]} />
-          <Text style={styles.legendText}>Complet</Text>
-        </View>
-      </View>
-
       <TouchableOpacity
         style={[styles.nextButton, !selectedTime && styles.nextButtonDisabled]}
         onPress={handleNext}
@@ -175,3 +143,108 @@ export default function TimeSlotScreen() {
     </View>
   );
 }
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: COLORS.background,
+    padding: 16,
+    marginTop : 20
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: "700",
+    color: "#111827",
+    textAlign: "center",
+    marginBottom: 10,
+    letterSpacing: -0.3,
+  },
+
+  subtitle: {
+    fontSize: 14,
+    color: "#6B7280",
+    textAlign: "center",
+    marginBottom: 20,
+  },
+  timeGrid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    marginBottom: 32,
+  },
+  timeSlot: {
+    width: "48%",
+    backgroundColor: COLORS.inputBackground,
+    borderRadius: 30,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    paddingVertical: 16,
+    paddingHorizontal: 12,
+    marginBottom: 12,
+    alignItems: "center",
+  },
+  timeSlotSelected: {
+    backgroundColor: COLORS.primary,
+    borderColor: COLORS.primary,
+  },
+  timeSlotText: {
+    fontSize: 16,
+    fontWeight: "500",
+    color: COLORS.textPrimary,
+  },
+  timeSlotTextSelected: {
+    color: COLORS.white,
+  },
+  nextButton: {
+    backgroundColor: COLORS.primary,
+    borderRadius: 9999,
+    height: 56,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 8,
+    shadowColor: COLORS.black,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 2,
+  },
+  nextButtonDisabled: {
+    backgroundColor: COLORS.disabled,
+  },
+  nextButtonText: {
+    color: COLORS.white,
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  emptyContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 24,
+  },
+  emptyText: {
+    fontSize: 16,
+    color: COLORS.textSecondary,
+    marginBottom: 16,
+    textAlign: "center",
+  },
+  backButton: {
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    backgroundColor: COLORS.cardBackground,
+    borderRadius: 9999,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+  },
+  backText: {
+    color: COLORS.textPrimary,
+    fontWeight: "600",
+  },
+});
+
