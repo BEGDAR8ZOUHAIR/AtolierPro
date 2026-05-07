@@ -13,10 +13,8 @@ import {
 } from "react-native";
 import { Link, useRouter } from "expo-router";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { COLORS } from "../../styles/colors";
 import { useAuthStore } from "../../stores/authStore";
-import { commonStyles } from "../../styles/theme";
-import { StyleSheet, SPACING, BORDER_RADIUS, FONT_SIZE, FONT_WEIGHT } from "../../styles/theme";
+import styles from "../../assets/styles/login.styles";
 
 const { width } = Dimensions.get("window");
 
@@ -26,7 +24,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({});
 
-  const { login, isLoading, isCheckingAuth, user } = useAuthStore();
+  const { login, isLoading, user } = useAuthStore();
   const router = useRouter();
 
   useEffect(() => {
@@ -45,159 +43,7 @@ const Login = () => {
     }
   };
 
-  if (isCheckingAuth) return null;
 
-  const styles = StyleSheet.create({
-    root: {
-      flex: 1,
-      backgroundColor: COLORS.background,
-    },
-    scrollContent: {
-      flexGrow: 1,
-    },
-    topSection: {
-      backgroundColor: COLORS.navy,
-      paddingTop: 60,
-      paddingBottom: 100,
-      paddingHorizontal: SPACING.lg,
-      position: 'relative',
-    },
-    logoImage: {
-      width: 120,
-      height: 120,
-      marginBottom: SPACING.md,
-      alignSelf: 'center',
-    },
-    tagline: {
-      color: COLORS.white,
-      fontSize: FONT_SIZE.md,
-      textAlign: 'center',
-      fontFamily: 'System',
-      lineHeight: 24,
-    },
-    waveContainer: {
-      position: 'absolute',
-      bottom: -20,
-      left: 0,
-      right: 0,
-      height: 40,
-      backgroundColor: COLORS.background,
-    },
-    formSection: {
-      flex: 1,
-      paddingHorizontal: SPACING.lg,
-      paddingTop: SPACING.xxl,
-      paddingBottom: SPACING.xxl,
-    },
-    inputGroup: {
-      marginBottom: SPACING.lg,
-    },
-    label: {
-      color: COLORS.textPrimary,
-      fontSize: FONT_SIZE.md,
-      fontWeight: FONT_WEIGHT.bold,
-      marginBottom: SPACING.sm,
-    },
-    inputContainer: {
-      ...commonStyles.input,
-      position: 'relative',
-    },
-    inputError: {
-      borderColor: COLORS.pending,
-    },
-    input: {
-      ...commonStyles.input,
-      paddingLeft: SPACING.md,
-    },
-    eyeButton: {
-      position: 'absolute',
-      right: SPACING.md,
-      top: '50%',
-      transform: [{ translateY: -10 }],
-    },
-    fieldError: {
-      color: COLORS.pending,
-      fontSize: FONT_SIZE.sm,
-      marginTop: SPACING.xs,
-    },
-    forgotContainer: {
-      alignItems: 'flex-end',
-      marginBottom: SPACING.lg,
-    },
-    forgotText: {
-      color: COLORS.textSecondary,
-      fontSize: FONT_SIZE.sm,
-    },
-    generalError: {
-      color: COLORS.pending,
-      fontSize: FONT_SIZE.sm,
-      marginBottom: SPACING.lg,
-      textAlign: 'center',
-    },
-    button: {
-      ...commonStyles.button,
-      marginBottom: SPACING.lg,
-    },
-    buttonDisabled: {
-      backgroundColor: COLORS.disabled,
-    },
-    buttonText: {
-      color: COLORS.white,
-      fontSize: FONT_SIZE.md,
-      fontWeight: FONT_WEIGHT.bold,
-    },
-    divider: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      marginVertical: SPACING.lg,
-    },
-    dividerLine: {
-      flex: 1,
-      height: 1,
-      backgroundColor: COLORS.border,
-    },
-    dividerText: {
-      color: COLORS.textSecondary,
-      fontSize: FONT_SIZE.sm,
-      marginHorizontal: SPACING.md,
-    },
-    socialRow: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      marginBottom: SPACING.xxl,
-    },
-    socialButton: {
-      flex: 1,
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: COLORS.white,
-      borderRadius: BORDER_RADIUS.xl,
-      height: 56,
-      borderWidth: 1,
-      borderColor: COLORS.border,
-      marginHorizontal: SPACING.sm,
-    },
-    socialButtonText: {
-      color: COLORS.textSecondary,
-      fontSize: FONT_SIZE.md,
-      marginLeft: SPACING.sm,
-    },
-    footer: {
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    footerText: {
-      color: COLORS.textSecondary,
-      fontSize: FONT_SIZE.sm,
-    },
-    footerLink: {
-      color: COLORS.primary,
-      fontSize: FONT_SIZE.sm,
-      fontWeight: FONT_WEIGHT.bold,
-    },
-  });
 
   return (
     <KeyboardAvoidingView
