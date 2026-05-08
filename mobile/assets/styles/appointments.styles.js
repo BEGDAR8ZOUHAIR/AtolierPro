@@ -1,3 +1,4 @@
+import { COLORS } from "@/styles/colors";
 import { StyleSheet, Dimensions } from "react-native";
 
 const { width } = Dimensions.get("window");
@@ -184,13 +185,13 @@ const styles = StyleSheet.create({
   },
 
   statusConfirmed: {
-    backgroundColor: "#22C55E",
+    backgroundColor: COLORS.confirmed,
   },
 
   statusPending: {
     backgroundColor: "transparent",
     borderWidth: 1.5,
-    borderColor: "#F97316",
+    borderColor: COLORS.pending,
   },
 
   statusText: {
@@ -204,7 +205,7 @@ const styles = StyleSheet.create({
   },
 
   statusTextPending: {
-    color: "#F97316",
+    color: COLORS.pending,
   },
 
   // ─── Divider ──────────────────────────────────────────────────────
@@ -224,7 +225,7 @@ const styles = StyleSheet.create({
 
   addressText: {
     fontSize: 13,
-    color: "#6B7280",
+    color: COLORS.placeholderText,
     marginBottom: 14,
   },
 
@@ -237,7 +238,7 @@ const styles = StyleSheet.create({
   btnDetails: {
     flex: 1,
     height: 44,
-    backgroundColor: "#F3F4F6",
+    backgroundColor: COLORS.background,
     borderRadius: 9999,
     alignItems: "center",
     justifyContent: "center",
@@ -246,13 +247,13 @@ const styles = StyleSheet.create({
   btnDetailsText: {
     fontSize: 14,
     fontWeight: "600",
-    color: "#374151",
+    color: COLORS.navy,
   },
 
   btnCall: {
     flex: 1,
     height: 44,
-    backgroundColor: "#1E2D50",
+    backgroundColor: COLORS.navy,
     borderRadius: 9999,
     flexDirection: "row",
     alignItems: "center",
@@ -263,16 +264,16 @@ const styles = StyleSheet.create({
   btnCallText: {
     fontSize: 14,
     fontWeight: "600",
-    color: "#FFFFFF",
+    color: COLORS.white,
   },
 
   btnConfirm: {
     flex: 1,
     height: 44,
-    backgroundColor: "transparent",
+    backgroundColor: 'transparent',
     borderRadius: 9999,
     borderWidth: 1.5,
-    borderColor: "#F97316",
+    borderColor: COLORS.orange,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -280,7 +281,7 @@ const styles = StyleSheet.create({
   btnConfirmText: {
     fontSize: 14,
     fontWeight: "600",
-    color: "#F97316",
+    color: COLORS.orange,
   },
 
   // ─── Empty state ──────────────────────────────────────────────────
@@ -300,7 +301,7 @@ const styles = StyleSheet.create({
 
   emptySubtitle: {
     fontSize: 14,
-    color: "#6B7280",
+    color: COLORS.placeholderText,
     textAlign: "center",
     lineHeight: 20,
   },
@@ -309,14 +310,14 @@ const styles = StyleSheet.create({
   fab: {
     position: "absolute",
     right: 20,
-    bottom: 90,  // above bottom tab bar
+    bottom: 20,
     width: 56,
     height: 56,
     borderRadius: 28,
-    backgroundColor: "#F97316",
+    backgroundColor: COLORS.pending,
     alignItems: "center",
     justifyContent: "center",
-    shadowColor: "#F97316",
+    shadowColor: COLORS.pending,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.4,
     shadowRadius: 10,
@@ -333,7 +334,7 @@ const styles = StyleSheet.create({
   monthNavContainer: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#FFFFFF",
+    backgroundColor: COLORS.inputBackground,
     borderRadius: 14,
     paddingVertical: 14,
     paddingHorizontal: 16,
@@ -363,7 +364,7 @@ const styles = StyleSheet.create({
   monthNavSideText: {
     fontSize: 13,
     fontWeight: "600",
-    color: "#9CA3AF",
+    color: COLORS.placeholderText,
     letterSpacing: 0.5,
   },
 
@@ -372,7 +373,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 16,
     fontWeight: "700",
-    color: "#111827",
+    color: COLORS.placeholderText,
   },
 
   // Calendar card
@@ -425,7 +426,7 @@ const styles = StyleSheet.create({
   },
 
   calDayWithAppts: {
-    backgroundColor: "#F97316",
+    backgroundColor: COLORS.pending,
   },
 
   calDayText: {

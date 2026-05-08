@@ -7,25 +7,6 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.background,
     padding: 16,
   },
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 24,
-    paddingTop: 16,
-  },
-  backButton: {
-    marginRight: 16,
-  },
-  backButtonText: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: COLORS.textPrimary,
-  },
-  headerTitle: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: COLORS.textPrimary,
-  },
   card: {
     backgroundColor: COLORS.cardBackground,
     borderRadius: 16,
@@ -52,18 +33,18 @@ const styles = StyleSheet.create({
   dateBadgeMonth: {
     fontSize: 10,
     fontWeight: "600",
-    color: COLORS.primary,
+    color: COLORS.pending,
     textTransform: "uppercase",
   },
   dateBadgeDay: {
     fontSize: 20,
     fontWeight: "bold",
-    color: COLORS.primary,
+    color: COLORS.pending,
   },
   clientName: {
     fontSize: 18,
     fontWeight: "bold",
-    color: COLORS.textPrimary,
+    color: COLORS.placeholderText,
     flex: 1,
     marginLeft: 12,
   },
@@ -74,7 +55,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   statusBadgeConfirmed: {
-    backgroundColor: COLORS.confirmed,
+    backgroundColor: COLORS.disabled,
   },
   statusBadgePending: {
     backgroundColor: "transparent",
@@ -99,18 +80,18 @@ const styles = StyleSheet.create({
   },
   timeText: {
     fontSize: 14,
-    color: COLORS.textSecondary,
+    color: COLORS.placeholderText,
     marginLeft: 6,
   },
   serviceText: {
     fontSize: 16,
     fontWeight: "bold",
-    color: COLORS.textPrimary,
+    color: COLORS.placeholderText,
     marginBottom: 4,
   },
   addressText: {
     fontSize: 14,
-    color: COLORS.textSecondary,
+    color: COLORS.placeholderText,
     marginBottom: 16,
   },
   divider: {
@@ -121,7 +102,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 14,
     fontWeight: "600",
-    color: COLORS.textSecondary,
+    color: COLORS.placeholderText,
     marginBottom: 8,
     textTransform: "uppercase",
   },
@@ -131,12 +112,12 @@ const styles = StyleSheet.create({
   },
   detailLabel: {
     fontSize: 14,
-    color: COLORS.textSecondary,
+    color: COLORS.placeholderText,
     width: 100,
   },
   detailValue: {
     fontSize: 14,
-    color: COLORS.textPrimary,
+    color: COLORS.placeholderText,
     fontWeight: "500",
     flex: 1,
   },
@@ -156,7 +137,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   buttonTextGhost: {
-    color: COLORS.textSecondary,
+    color: COLORS.placeholderText,
     fontWeight: "600",
     fontSize: 14,
   },
@@ -186,7 +167,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   buttonTextConfirm: {
-    color: COLORS.pending,
+    color: COLORS.disabled,
     fontWeight: "600",
     fontSize: 14,
   },

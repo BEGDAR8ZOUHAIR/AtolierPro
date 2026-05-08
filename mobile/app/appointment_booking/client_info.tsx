@@ -80,17 +80,8 @@ export default function ClientInfoForm() {
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
       <View style={styles.container}>
-        {/* Header */}
-        <View style={styles.header}>
-          <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
-            <Text style={styles.backButtonText}>{"<"}</Text>
-          </TouchableOpacity>
-          <View style={styles.headerTextContainer}>
-            <Text style={styles.headerTitle}>Comment vous appeler?</Text>
-            <Text style={styles.subtitle}>Entrez les informations de votre client</Text>
-          </View>
-          <View style={{ width: 24 }} />
-        </View>
+        <Text style={styles.title}>Comment vous appeler?</Text>
+        <Text style={styles.subtitle}>Entrez les informations de votre client</Text>
 
         <ScrollView
           contentContainerStyle={styles.formContainer}
@@ -102,7 +93,7 @@ export default function ClientInfoForm() {
             <View style={styles.inputGroup}>
               <Text style={styles.label}>Nom et prénom *</Text>
               <View style={styles.inputContainer}>
-                <Ionicons name="person-outline" size={20} color={COLORS.primary} style={styles.inputIcon} />
+                <Ionicons name="person-outline" size={20} color={COLORS.placeholderText} style={styles.inputIcon} />
                 <TextInput
                   style={styles.input}
                   placeholder="Prénom et nom"
@@ -118,7 +109,7 @@ export default function ClientInfoForm() {
             <View style={styles.inputGroup}>
               <Text style={styles.label}>Adresse e-mail *</Text>
               <View style={styles.inputContainer}>
-                <Ionicons name="mail-outline" size={20} color={COLORS.primary} style={styles.inputIcon} />
+                <Ionicons name="mail-outline" size={20} color={COLORS.placeholderText} style={styles.inputIcon} />
                 <TextInput
                   style={styles.input}
                   placeholder="email@exemple.com"
@@ -135,7 +126,7 @@ export default function ClientInfoForm() {
             <View style={styles.inputGroup}>
               <Text style={styles.label}>Téléphone *</Text>
               <View style={styles.inputContainer}>
-                <Ionicons name="call-outline" size={20} color={COLORS.primary} style={styles.inputIcon} />
+                <Ionicons name="call-outline" size={20} color={COLORS.placeholderText} style={styles.inputIcon} />
                 <TextInput
                   style={styles.input}
                   placeholder="(000) 000 00 00"
@@ -161,21 +152,24 @@ export default function ClientInfoForm() {
               </View>
             </View>
 
-            {/* Code postal + Ville */}
-            <View style={styles.inputRow}>
-              <View style={styles.inputHalf}>
-                <Text style={styles.label}>Code postal *</Text>
+            {/* Code postal */}
+            <View style={styles.inputGroup}>
+              <Text style={styles.label}>Code postal *</Text>
+              <View style={styles.inputContainer}>
                 <TextInput
                   style={styles.input}
                   placeholder="75000"
                   placeholderTextColor={COLORS.placeholderText}
                   value={postalCode}
                   onChangeText={setPostalCode}
-                  keyboardType="numeric"
+                  keyboardType="number-pad"
                 />
               </View>
-              <View style={styles.inputHalf}>
-                <Text style={styles.label}>Ville *</Text>
+            </View>
+            {/* Ville */}
+            <View style={styles.inputGroup}>
+              <Text style={styles.label}>Ville *</Text>
+              <View style={styles.inputContainer}>
                 <TextInput
                   style={styles.input}
                   placeholder="Paris"
@@ -204,9 +198,10 @@ export default function ClientInfoForm() {
         </ScrollView>
 
         {/* Submit Button */}
+        {/* before fill input color is border after change color to primary */}
         <View style={styles.buttonContainer}>
           <TouchableOpacity
-            style={[styles.submitButton, loading && styles.buttonDisabled]}
+            style={[ styles.submitButton, (loading || !fullName || !email || !phone || !address || !postalCode || !city || !motif) && styles.buttonDisabled]}
             onPress={handleSubmit}
             disabled={loading}
           >
