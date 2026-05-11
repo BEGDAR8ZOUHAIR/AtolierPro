@@ -84,9 +84,9 @@ router.get("/user", protectRoute, async (req, res) => {
 });
 
 // Update appointment
-router.put(":id", protectRoute, async (req, res) => {
+router.put("/:id", protectRoute, async (req, res) => {
   try {
-    const { _id: id } = req.params;
+    const id = req.params.id;
     const updates = req.body;
 
     const appointment = await Appointment.findByIdAndUpdate(id, updates, {
@@ -103,9 +103,9 @@ router.put(":id", protectRoute, async (req, res) => {
 });
 
 // Confirm appointment
-router.patch(":id/confirm", protectRoute, async (req, res) => {
+router.patch("/:id/confirm", protectRoute, async (req, res) => {
   try {
-    const { _id: id } = req.params;
+    const { id } = req.params;
     const appointment = await Appointment.findById(id);
 
     if (!appointment) return res.status(404).json({ message: "Rendez-vous non trouvé" });
@@ -125,9 +125,9 @@ router.patch(":id/confirm", protectRoute, async (req, res) => {
 });
 
 // Delete appointment
-router.delete(":id", protectRoute, async (req, res) => {
+router.delete("/:id", protectRoute, async (req, res) => {
   try {
-    const { _id: id } = req.params;
+    const id = req.params.id;
     const appointment = await Appointment.findById(id);
 
     if (!appointment) return res.status(404).json({ message: "Rendez-vous non trouvé" });
