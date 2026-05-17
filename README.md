@@ -40,6 +40,9 @@ The server runs on `http://localhost:3000` by default.
 cd ../mobile
 npm install        # install expo dependencies
 npm start             # launch Expo development server
+npx expo prebuild clean 
+npx expo run:android --device  # open Android emulator
+npx expo run:ios --device       # open iOS simulator
 ```
 Scan the QR code with the Expo Go app (iOS/Android) or run `npm run ios` / `npm run android`.
 
