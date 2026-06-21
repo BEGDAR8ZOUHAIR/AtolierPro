@@ -2,6 +2,20 @@
 
 A full‑stack mobile application that lets French‑speaking artisans manage client appointments, view schedules, and handle communications.
 
+<img width="393" height="852" alt="Image" src="https://github.com/user-attachments/assets/96af9d64-f9e0-4b71-bab4-ee868b86872e" />
+<img width="393" height="852" alt="Image" src="https://github.com/user-attachments/assets/c8c55338-6546-4bf2-877e-65c595aa7dcd" />
+<img width="390" height="893" alt="Image" src="https://github.com/user-attachments/assets/6ecdf518-a878-4331-a8f0-93af2765ffcf" />
+<img width="390" height="1464" alt="Image" src="https://github.com/user-attachments/assets/028fcd25-63bd-4ee8-9a84-48b2c2d96c7d" />
+<img width="390" height="952" alt="Image" src="https://github.com/user-attachments/assets/430b460e-ccda-4042-96df-1b4c60dd6735" />
+<img width="390" height="1158" alt="Image" src="https://github.com/user-attachments/assets/3665d6c8-eee2-4c66-baa1-a15264b566e0" />
+<img width="393" height="852" alt="Image" src="https://github.com/user-attachments/assets/1e0d8b49-1a39-4bd8-9bae-0ae67bcb2465" />
+<img width="393" height="1116" alt="Image" src="https://github.com/user-attachments/assets/b27422db-ed8b-4474-b79b-4dd930cead75" />
+<img width="390" height="893" alt="Image" src="https://github.com/user-attachments/assets/9cc1325a-4700-4ad0-add2-abffc3512c18" />
+<img width="390" height="893" alt="Image" src="https://github.com/user-attachments/assets/686db73e-ed3a-467b-b895-678a6fa4361d" />
+<img width="390" height="1071" alt="Image" src="https://github.com/user-attachments/assets/4cb68086-d404-40e8-a61a-16219262e5ae" />
+<img width="390" height="1013" alt="Image" src="https://github.com/user-attachments/assets/ef08acb3-e4f2-4ea6-a9b0-17ed1bd7de11" />
+<img width="390" height="1013" alt="Image" src="https://github.com/user-attachments/assets/2e56c73a-7839-4a20-99b1-3263e03dd4c8" />
+
 ## Features
 - Secure authentication with JWT stored in SecureStore.
 - Appointment list and calendar views with status badges.
